@@ -1,0 +1,53 @@
+<div class="page-header">
+  <h1>New Company</h1>
+</div>
+
+<div class="form row">
+  <div class="col-lg-10">
+    <%= form_with  url: companies_create_path, local: true, :html => { :class => "form-horizontal thought" } do |form| %>
+      <% if @company.errors.any? %>
+        <div id="error_expl" class="panel panel-danger">
+          <div class="panel-heading">
+            <h3 class="panel-title"><%= pluralize(@thought.errors.count, "error") %> prohibited this thought from being saved:</h3>
+          </div>
+          <div class="panel-body">
+            <ul>
+            <% @company.errors.full_messages.each do |msg| %>
+              <li><%= msg %></li>
+            <% end %>
+            </ul>
+          </div>
+        </div>
+      <% end %>
+      <div class="form-group">
+        <%= form.label :name, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= form.text_field :name, name: 'company[name]',:class => 'form-control' %>
+        </div>
+        <%= form.error_span(:name) %>
+      </div>
+      <div class="form-group">
+        <%= form.label :description, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= form.text_area :description, name: 'company[description]',:class => 'form-control' %>
+        </div>
+        <%= form.error_span(:description) %>
+      </div>
+      <div class="form-group">
+        <%= form.label :subdomain, :class => 'control-label col-lg-2' %>
+        <div class="col-lg-10">
+          <%= form.text_field :subdomain, name: 'company[subdomain]',:class => 'form-control' %>
+        </div>
+        <%= form.error_span(:subdomain) %>
+      </div>
+
+      <div class="form-group">
+        <div class="col-lg-offset-2 col-lg-10">
+          <%= form.submit 'Save', :class => 'btn btn-primary' %>
+          <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
+                    root_path, :class => 'btn btn-default' %>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
