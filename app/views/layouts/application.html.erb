@@ -7,9 +7,39 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
 
   <body>
+    <nav class="navbar navbar-dark bg-primary">
+      <a class="navbar-brand" href="#">Logo</a>
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" href="<%= categories_path %>">Categorias</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= products_path %>">Produtos</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= purchases_path %>">Entrada Estoque</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= purchase_products_path %>">Controle Entrada Estoque</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= sale_products_path %>">Saída Estoque</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= sales_path %>">Vendas</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= customers_path %>">Clientes</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="<%= suppliers_path %>">Fornecedores</a>
+        </li>
+      </ul>
+    </nav>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>

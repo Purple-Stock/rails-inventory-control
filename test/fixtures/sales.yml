@@ -1,0 +1,17 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  value: 1.5
+  discount: 1.5
+  percentage: 1.5
+  online: false
+  disclosure: false
+  customer_id: 1
+
+two:
+  value: 1.5
+  discount: 1.5
+  percentage: 1.5
+  online: false
+  disclosure: false
+  customer_id: 1
