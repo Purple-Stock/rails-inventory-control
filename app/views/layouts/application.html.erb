@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Controle de Estoque</title>
+    <title>Purple Stock</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -9,37 +9,6 @@
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <meta name="viewport" content="width=device-width, initial-scale=1">
   </head>
-
-  <body>
-    <nav class="navbar navbar-dark bg-primary">
-      <a class="navbar-brand" href="#">Logo</a>
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link" href="<%= categories_path %>">Categorias</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= products_path %>">Produtos</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= purchases_path %>">Entrada Estoque</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= purchase_products_path %>">Controle Entrada Estoque</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= sale_products_path %>">Saída Estoque</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= sales_path %>">Vendas</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= customers_path %>">Clientes</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="<%= suppliers_path %>">Fornecedores</a>
-        </li>
-      </ul>
-    </nav>
     <% if notice %>
       <p class="alert alert-success"><%= notice %></p>
     <% end %>
@@ -48,6 +17,20 @@
     <% end %>
     <p class="navbar-text pull-right">
     <% if user_signed_in? %>
+      <%= nav_bar fixed: :top, brand: "Purple Stock", responsive: true do %>
+        <%= menu_group do %>
+            <%= menu_divider %>
+            <%= menu_item "Categorias", categories_path %>
+            <%= menu_item "Produtos", products_path %>
+            <%= menu_item "Entrada Estoque", purchases_path %>
+            <%= menu_item "Controle Entrada Estoque", purchase_products_path %>
+            <%= menu_item "Saída Estoque", sale_products_path %>
+            <%= menu_item "Vendas", sales_path %>
+            <%= menu_item "Fornecedores", suppliers_path %>
+            <%= menu_item "Clientes", customers_path %>
+            <%= menu_item "Fornecedores", suppliers_path %>
+        <% end %>
+      <% end %>
       Logado como: <strong><%= current_user.email %></strong>.
       <%= link_to 'Editar perfil', edit_user_registration_path, :class => 'navbar-link' %> |
       <%= link_to "Logout", destroy_user_session_path, method: :delete, :class => 'navbar-link'  %>

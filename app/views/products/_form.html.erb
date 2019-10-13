@@ -46,21 +46,21 @@
   <div class="form-group">
     <%= f.label :highlight, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :highlight, :class => 'form-control' %>
+      <%= f.check_box :highlight %>
     </div>
     <%=f.error_span(:highlight) %>
   </div>
   <div class="form-group">
     <%= f.label :category_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :category_id, :class => 'form-control' %>
+      <%= select("product", "category_id", Category.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
     </div>
     <%=f.error_span(:category_id) %>
   </div>
   <div class="form-group">
     <%= f.label :active, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :active, :class => 'form-control' %>
+      <%= f.check_box :highlight  %>
     </div>
     <%=f.error_span(:active) %>
   </div>

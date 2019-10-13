@@ -21,5 +21,5 @@ Rails.application.routes.draw do
   get 'companies/new'
   post 'companies/create'
   devise_for :users
-  root to: 'companies#index'
+  root to: 'products#index'
 end

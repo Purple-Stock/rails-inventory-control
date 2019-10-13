@@ -16,50 +16,38 @@
   <% end %>
 
   <div class="form-group">
-    <%= f.label :value, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :value, :class => 'form-control' %>
+  <div class="container">
+  <div class="row">
+    <%= f.label :customer_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= select("sale", "customer_id", Customer.all.collect {|p| [ p.name, p.id ] }, {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
     </div>
-    <%=f.error_span(:value) %>
+    <%=f.error_span(:customer_id) %>
   </div>
   <div class="form-group">
     <%= f.label :discount, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
+    <div class="col-lg-4">
       <%= f.text_field :discount, :class => 'form-control' %>
     </div>
     <%=f.error_span(:discount) %>
   </div>
   <div class="form-group">
-    <%= f.label :percentage, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :percentage, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:percentage) %>
-  </div>
-  <div class="form-group">
     <%= f.label :online, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :online, :class => 'form-control' %>
+    <div class="col-lg-4">
+      <%= f.check_box :online %>
     </div>
     <%=f.error_span(:online) %>
   </div>
   <div class="form-group">
     <%= f.label :disclosure, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :disclosure, :class => 'form-control' %>
+    <div class="col-lg-4">
+      <%= f.check_box :online %>
     </div>
     <%=f.error_span(:disclosure) %>
   </div>
-  <div class="form-group">
-    <%= f.label :customer_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :customer_id, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:customer_id) %>
-  </div>
 
   <div class="form-group">
-    <div class="col-lg-offset-2 col-lg-10">
+    <div class="col-lg-offset-2 col-lg-4">
       <%= f.submit nil, :class => 'btn btn-primary' %>
       <%= link_to t('.cancel', :default => t("helpers.links.cancel")),
                 sales_path, :class => 'btn btn-default' %>
