@@ -16,8 +16,6 @@
   <% end %>
 
   <div class="form-group">
-  <div class="container">
-  <div class="row">
     <%= f.label :customer_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= select("sale", "customer_id", Customer.all.collect {|p| [ p.name, p.id ] }, {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
