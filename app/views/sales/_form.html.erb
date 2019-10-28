@@ -43,16 +43,15 @@
     </div>
     <%=f.error_span(:disclosure) %>
   </div>
-  <h4>sale_products</h4>
-
-  <div id="sale_products">
-    <%= f.fields_for :sale_products do |sale_product| %>
-      <%= render 'sale_product_fields', f: sale_product %>
-    <% end %>
-
-    <div class="links">
-      <%= link_to_add_association 'add sale_product', f, :sale_products %>
-      <br><br>
+  <h4>Produtos</h4>
+  <div class="form-group">
+    <div id="sale_products">
+      <%= f.fields_for :sale_products do |sale_product| %>
+        <%= render 'sale_product_fields', f: sale_product %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association "Adicionar produtos", f, :sale_products%>
+      </div>
     </div>
   </div>
 

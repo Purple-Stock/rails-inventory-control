@@ -1,23 +1,26 @@
-<!-- COMENTÁRIO:
-  Dentro da partial todo conteúdo deve estar dentro de uma div .nested-fields
--->
 <div class="nested-fields">
   <div class="field">
-    <%= f.label :product_id %>
-    <%= select("sale_products", "product_id", Product.all.collect {|p| [ p.name, p.id ] }, { include_blank: true }) %>
+    <%= f.label :product_id, :class => 'control-label col-lg-2'%>
+    <div class="col-lg-2">
+      <%= f.select :product_id , Product.all.collect {|p| [ p.name, p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
+    </div>
   </div>
  
   <div class="field">
-    <%= f.label :quantity %>
-    <%= f.text_field :quantity %>
+    <%= f.label :quantity, :class => 'control-label col-lg-2'%>
+    <div class="col-lg-2">
+    <%= f.text_field :quantity, :class => 'form-control' %>
+    </div>
   </div>
 
   <div class="field">
-    <%= f.label :value %>
-    <%= f.text_field :value %>
+    <%= f.label :value, :class => 'control-label col-lg-2'%>
+    <div class="col-lg-2">
+      <%= f.text_field :value, :class => 'form-control' %>
+    </div>
   </div>
 
-  <%= link_to_remove_association "remove sale_product", f %>
+  <%= link_to_remove_association "remove sale_product", f, :class => 'control-label col-lg-5' %>
  
   <br><br><br>
 </div>
