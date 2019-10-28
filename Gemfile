@@ -30,8 +30,8 @@ gem "twitter-bootstrap-rails"
 gem "jquery-rails"
 gem 'devise'
 gem 'devise-bootstrapped'
-gem 'apartment', github: 'influitive/apartment', branch: 'development'
-
+gem 'acts_as_tenant'
+gem "cocoon"
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
