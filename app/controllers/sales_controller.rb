@@ -26,7 +26,7 @@ class SalesController < ApplicationController
   # POST /sales.json
   def create
     @sale = Sale.new(sale_params)
-
+    calc_value
     respond_to do |format|
       if @sale.save
         format.html { redirect_to @sale, notice: 'Sale was successfully created.' }
@@ -43,6 +43,7 @@ class SalesController < ApplicationController
   def update
     respond_to do |format|
       if @sale.update(sale_params)
+        calc_value
         format.html { redirect_to @sale, notice: 'Sale was successfully updated.' }
         format.json { render :show, status: :ok, location: @sale }
       else
@@ -68,6 +69,14 @@ class SalesController < ApplicationController
       @sale = Sale.find(params[:id])
     end
 
+    def calc_value
+      value = 0
+      @sale.sale_products.each do |sale_product|
+        value += sale_product.value * sale_product.quantity
+      end
+      value -= @sale.discount if @sale.discount.present?
+      @sale.update(value: value)
+    end
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_params
       params.require(:sale).permit(:value, :discount, :percentage, :online, :disclosure, :customer_id,
