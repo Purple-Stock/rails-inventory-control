@@ -16,18 +16,18 @@
   <% end %>
 
   <div class="form-group">
+    <%= f.label :supplier_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :supplier_id, Supplier.all.collect {|p| [ p.name, p.id ] }, { :include_blank => 'Selecione um Fornecedor'}, :class => "form-control form-control-sm" %>
+    </div>
+    <%=f.error_span(:supplier_id) %>
+  </div>
+  <div class="form-group">
     <%= f.label :value, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :value, :class => 'form-control' %>
     </div>
     <%=f.error_span(:value) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :supplier_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :supplier_id, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:supplier_id) %>
   </div>
 
   <div class="form-group">

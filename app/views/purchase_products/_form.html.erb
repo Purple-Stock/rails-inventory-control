@@ -16,6 +16,13 @@
   <% end %>
 
   <div class="form-group">
+    <%= f.label :product_id, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-10">
+      <%= f.select :product_id, Product.all.collect {|p| [ p.name, p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
+    </div>
+    <%=f.error_span(:product_id) %>
+  </div>
+  <div class="form-group">
     <%= f.label :quantity, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
       <%= f.text_field :quantity, :class => 'form-control' %>
@@ -29,20 +36,13 @@
     </div>
     <%=f.error_span(:value) %>
   </div>
-  <div class="form-group">
-    <%= f.label :product_id, :class => 'control-label col-lg-2' %>
+  <!-- <div class="form-group">
+    <%#= f.label :purchase_id, :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :product_id, :class => 'form-control' %>
+      <%#= f.select :purchase_id, Purchase.all.collect {|p| [ p.value, p.id ] }, { :include_blank => 'Selecione uma Compra'}, :class => "form-control form-control-sm" %>
     </div>
-    <%=f.error_span(:product_id) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :purchase_id, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-10">
-      <%= f.text_field :purchase_id, :class => 'form-control' %>
-    </div>
-    <%=f.error_span(:purchase_id) %>
-  </div>
+    <%#=f.error_span(:purchase_id) %>
+  </div> -->
 
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-10">

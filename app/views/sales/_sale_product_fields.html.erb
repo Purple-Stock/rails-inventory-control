@@ -2,7 +2,7 @@
   <div class="field">
     <%= f.label :product_id, :class => 'control-label col-lg-2'%>
     <div class="col-lg-2">
-      <%= f.select :product_id , Product.all.collect {|p| [ p.name, p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
+      <%= f.select :product_id, Product.all.collect {|p| [ p.name, p.id ] }, { :include_blank => 'Selecione um Produto'}, :class => "form-control form-control-sm" %>
     </div>
   </div>
  

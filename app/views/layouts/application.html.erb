@@ -22,13 +22,11 @@
             <%= menu_divider %>
             <%= menu_item "Categorias", categories_path %>
             <%= menu_item "Produtos", products_path %>
-            <%= menu_item "Entrada Estoque", purchases_path %>
-            <%= menu_item "Controle Entrada Estoque", purchase_products_path %>
+            <%= menu_item "Entrada Estoque", purchase_products_path %>
             <%= menu_item "Saída Estoque", sale_products_path %>
             <%= menu_item "Vendas", sales_path %>
-            <%= menu_item "Fornecedores", suppliers_path %>
             <%= menu_item "Clientes", customers_path %>
-            <%= menu_item "Fornecedores", suppliers_path %>
+            <%#= menu_item "Fornecedores", suppliers_path %>
         <% end %>
       <% end %>
       Logado como: <strong><%= current_user.email %></strong>.
