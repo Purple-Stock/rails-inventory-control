@@ -41,13 +41,6 @@ ActiveRecord::Schema.define(version: 2019_10_13_002231) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
-  create_table "employees", force: :cascade do |t|
-    t.string "name"
-    t.string "job"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-  end
-
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.float "price"
