@@ -32,6 +32,7 @@ gem 'devise'
 gem 'devise-bootstrapped'
 gem 'acts_as_tenant'
 gem "cocoon"
+gem "aws-sdk-s3", require: false
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 

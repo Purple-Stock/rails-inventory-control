@@ -7,6 +7,7 @@
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(:foto) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:bar_code) %></th>
       <th><%= model_class.human_attribute_name(:image_url) %></th>
@@ -23,6 +24,7 @@
         <td><%= link_to product.id, product_path(product) %></td>
         <td><%= product.name %></td>
         <td><%= product.price %></td>
+        <td><%= product.picture %></td>
         <td><%= product.bar_code %></td>
         <td><%= product.image_url %></td>
         <td><%= product.highlight %></td>
