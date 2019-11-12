@@ -23,7 +23,7 @@
         <td><%= link_to sale_product.id, sale_product_path(sale_product) %></td>
         <td><%= sale_product.quantity %></td>
         <td><%= sale_product.value %></td>
-        <td><%= sale_product.product_id %></td>
+        <td><%= sale_product.product.name %></td>
         <td><%= sale_product.sale_id %></td>
         <td><%=l sale_product.created_at %></td>
         <td>
