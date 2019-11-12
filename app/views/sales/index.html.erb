@@ -10,8 +10,8 @@
       <th><%= model_class.human_attribute_name(:discount) %></th>
       <th><%= model_class.human_attribute_name(:percentage) %></th>
       <th><%= model_class.human_attribute_name(:online) %></th>
-      <th><%= model_class.human_attribute_name(:disclosure) %></th>
-      <th><%= model_class.human_attribute_name(:customer_id) %></th>
+      <th><%= model_class.human_attribute_name(:divulgacao) %></th>
+      <th><%= model_class.human_attribute_name(:cliente) %></th>
       <th><%= model_class.human_attribute_name(:created_at) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -25,7 +25,7 @@
         <td><%= sale.percentage %></td>
         <td><%= sale.online %></td>
         <td><%= sale.disclosure %></td>
-        <td><%= sale.customer_id %></td>
+        <td><%= sale.customers.name %></td>
         <td><%=l sale.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),

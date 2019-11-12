@@ -9,7 +9,6 @@
       <th><%= model_class.human_attribute_name(:foto) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
-      <th><%= model_class.human_attribute_name(:destaque) %></th>
       <th><%= model_class.human_attribute_name(:categoria) %></th>
       <th><%= model_class.human_attribute_name(:ativo) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
@@ -22,7 +21,6 @@
         <td><%= image_tag product.image.attached? ? product.image : product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png" %></td>
         <td><%= product.name %></td>
         <td><%= product.price %></td>
-        <td><%= product.highlight %></td>
         <td><%= product.category.name %></td>
         <td><%= product.active %></td>
         <td>
