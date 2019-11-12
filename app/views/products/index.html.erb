@@ -12,6 +12,8 @@
       <th><%= model_class.human_attribute_name(:foto) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:entrada) %></th>
+      <th><%= model_class.human_attribute_name(:saída) %></th>
+      <th><%= model_class.human_attribute_name(:saldo) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
       <th><%= model_class.human_attribute_name(:categoria) %></th>
       <th><%= model_class.human_attribute_name(:ativo) %></th>
@@ -26,6 +28,7 @@
         <td><%= product.name %></td>
         <td><%= product.count_purchase_product %></td>
         <td><%= product.count_sale_product %></td>
+        <td><%= product.count_purchase_product.to_i - product.count_sale_product.to_i %></td>
         <td><%= product.price %></td>
         <td><%= product.category.name %></td>
         <td><%= product.active %></td>
