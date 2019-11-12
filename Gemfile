@@ -32,6 +32,7 @@ gem 'acts_as_tenant'
 gem "cocoon"
 gem "aws-sdk-s3", require: false
 gem 'serviceworker-rails'
+gem 'rails-i18n', '~> 6.0.0'
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
 
