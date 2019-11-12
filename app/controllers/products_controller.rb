@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
-    @products = Product.where(active: true)
+    @products = Product.includes(:purchase_products).where(active: true)
   end
 
   # GET /products/1
