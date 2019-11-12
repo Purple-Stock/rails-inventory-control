@@ -2,19 +2,16 @@
 <div class="page-header">
   <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
 </div>
-<table class="table table-striped">
+<table id="stockTable" class="table table-striped">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
       <th><%= model_class.human_attribute_name(:name) %></th>
       <th><%= model_class.human_attribute_name(:foto) %></th>
       <th><%= model_class.human_attribute_name(:price) %></th>
-      <th><%= model_class.human_attribute_name(:bar_code) %></th>
-      <th><%= model_class.human_attribute_name(:image_url) %></th>
-      <th><%= model_class.human_attribute_name(:highlight) %></th>
-      <th><%= model_class.human_attribute_name(:category_id) %></th>
-      <th><%= model_class.human_attribute_name(:active) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(:destaque) %></th>
+      <th><%= model_class.human_attribute_name(:categoria) %></th>
+      <th><%= model_class.human_attribute_name(:ativo) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>
@@ -23,14 +20,11 @@
       <tr>
         <td><%= link_to product.id, product_path(product) %></td>
         <td><%= product.name %></td>
+        <td><%= image_tag product.image.attached? ? product.image : product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png" %></td>
         <td><%= product.price %></td>
-        <td><%= image_tag product.image.attached? ? product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png" %></td>
-        <td><%= product.bar_code %></td>
-        <td><%= product.image_url %></td>
         <td><%= product.highlight %></td>
-        <td><%= product.category_id %></td>
+        <td><%= product.category.name %></td>
         <td><%= product.active %></td>
-        <td><%=l product.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
                       edit_product_path(product), :class => 'btn btn-default btn-xs' %>

@@ -17,3 +17,8 @@
 //= require turbolinks
 //= require_tree .
 //= require serviceworker-companion
+
+$(document).ready( function () {
+    $('#stockTable').DataTable();
+    $('#list').select2();
+} );
