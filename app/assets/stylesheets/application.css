@@ -19,11 +19,22 @@
 }
 
 .navbar-default {
-    background-color:#efd8f9
-    ;
+    background-color:#efd8f9;
     border-color: #8A2BE2;
+}
+
+.navbar-default .navbar-nav>li>a {
+    color: #fff;
 }
 
 body {
     background-color: #fef5ef;
+}
+
+.table-responsive {
+    font-size: 15px;
+}
+
+td{
+    font-size: 15px;
 }

@@ -5,7 +5,7 @@
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_product_path,
             :class => 'btn btn-primary' %>
-<table id="stockTable" class="table table-striped">
+<table id="stockTable" class="table table-striped table-responsive">
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:codigo_produto) %></th>
@@ -24,7 +24,7 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= product.custom_id %></td>
-        <td><%= image_tag product.image.attached? ? product.image : product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png" %></td>
+        <td><%= image_tag(product.image.attached? ? product.image : product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></td>
         <td><%= product.name %></td>
         <td><%= product.count_purchase_product %></td>
         <td><%= product.count_sale_product %></td>
