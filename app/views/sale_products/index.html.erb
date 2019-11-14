@@ -9,6 +9,7 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
+      <th><%= model_class.human_attribute_name(:foto) %></th>
       <th><%= model_class.human_attribute_name(:quantity) %></th>
       <th><%= model_class.human_attribute_name(:value) %></th>
       <th><%= model_class.human_attribute_name(:product_id) %></th>
@@ -21,6 +22,7 @@
     <% @sale_products.each do |sale_product| %>
       <tr>
         <td><%= link_to sale_product.id, sale_product_path(sale_product) %></td>
+        <td><%= image_tag(sale_product.product.image.attached? ? sale_product.product.image : sale_product.product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></td>
         <td><%= sale_product.quantity %></td>
         <td><%= sale_product.value %></td>
         <td><%= sale_product.product.name %></td>
