@@ -20,7 +20,7 @@ pt-BR:
   Customers: Clientes
   Customer: Cliente
   category_id: Categoria
-  customer_id: Venda
+  customer_id: Nome do Cliente
   active: Ativo
   quantity: Quantidade
   value: Valor

@@ -15,12 +15,34 @@
     </div>
   <% end %>
 
+  <h4>Cliente</h4>
   <div class="form-group">
     <%= f.label t(:customer_id), :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= select("sale", "customer_id", Customer.all.collect {|p| [ "#{p.cpf} - #{p.name} ", p.id ] }, {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
     </div>
     <%=f.error_span(:customer_id) %>
+  </div>
+
+  <h4>Produtos</h4>
+  <div class="form-group">
+    <div id="sale_products">
+      <%= f.fields_for :sale_products do |sale_product| %>
+        <%= render 'sale_product_fields', f: sale_product %>
+      <% end %>
+      <div class="links">
+        <%= link_to_add_association "Adicionar produtos", f, :sale_products%>
+      </div>
+    </div>
+  </div>
+
+  <h4>Dados da Venda</h4>
+  <div class="form-group">
+    <%= f.label :tipo_de_pagamento, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= select("sale", "payment_type", Sale.payment_types.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
+    </div>
+    <%=f.error_span(:disclosure) %>
   </div>
   <div class="form-group">
     <%= f.label t(:discount), :class => 'control-label col-lg-2' %>
@@ -42,24 +64,6 @@
       <%= f.check_box :online %>
     </div>
     <%=f.error_span(:disclosure) %>
-  </div>
-  <div class="form-group">
-    <%= f.label :tipo_de_pagamento, :class => 'control-label col-lg-2' %>
-    <div class="col-lg-4">
-      <%= select("sale", "payment_type", Sale.payment_types.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
-    </div>
-    <%=f.error_span(:disclosure) %>
-  </div>
-  <h4>Produtos</h4>
-  <div class="form-group">
-    <div id="sale_products">
-      <%= f.fields_for :sale_products do |sale_product| %>
-        <%= render 'sale_product_fields', f: sale_product %>
-      <% end %>
-      <div class="links">
-        <%= link_to_add_association "Adicionar produtos", f, :sale_products%>
-      </div>
-    </div>
   </div>
 
   <div class="form-group">
