@@ -28,7 +28,7 @@ class SaleProductsController < ApplicationController
 
     respond_to do |format|
       if @sale_product.save
-        format.html { redirect_to @sale_product, notice: 'Sale product was successfully created.' }
+        format.html { redirect_to @sale_product, notice: 'Saída de estoque criada.' }
         format.json { render :show, status: :created, location: @sale_product }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class SaleProductsController < ApplicationController
   def update
     respond_to do |format|
       if @sale_product.update(sale_product_params)
-        format.html { redirect_to @sale_product, notice: 'Sale product was successfully updated.' }
+        format.html { redirect_to @sale_product, notice: 'Saída de estoque alterada.' }
         format.json { render :show, status: :ok, location: @sale_product }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class SaleProductsController < ApplicationController
   def destroy
     @sale_product.destroy
     respond_to do |format|
-      format.html { redirect_to sale_products_url, notice: 'Sale product was successfully destroyed.' }
+      format.html { redirect_to sale_products_url, notice: 'Saída de estoque deletada.' }
       format.json { head :no_content }
     end
   end

@@ -1,6 +1,6 @@
 <%- model_class = Sale -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
 </div>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_sale_path,
@@ -9,13 +9,13 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:id) %></th>
-      <th><%= model_class.human_attribute_name(:value) %></th>
-      <th><%= model_class.human_attribute_name(:discount) %></th>
-      <th><%= model_class.human_attribute_name(:percentage) %></th>
+      <th><%= model_class.human_attribute_name(t(:value)) %></th>
+      <th><%= model_class.human_attribute_name(t(:discount)) %></th>
+      <th><%= model_class.human_attribute_name(t(:percentage)) %></th>
       <th><%= model_class.human_attribute_name(:online) %></th>
       <th><%= model_class.human_attribute_name(:divulgacao) %></th>
       <th><%= model_class.human_attribute_name(:cliente) %></th>
-      <th><%= model_class.human_attribute_name(:created_at) %></th>
+      <th><%= model_class.human_attribute_name(t(:created_at)) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
   </thead>

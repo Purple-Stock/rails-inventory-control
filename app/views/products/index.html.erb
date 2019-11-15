@@ -1,6 +1,6 @@
 <%- model_class = Product -%>
 <div class="page-header">
-  <h1><%=t '.title', :default => model_class.model_name.human.pluralize.titleize %></h1>
+  <h1><%=t '.title', :default => t(model_class.model_name.human.pluralize.titleize) %></h1>
 </div>
 <%= link_to t('.new', :default => t("helpers.links.new")),
             new_product_path,
@@ -10,11 +10,11 @@
     <tr>
       <th><%= model_class.human_attribute_name(:codigo_produto) %></th>
       <th><%= model_class.human_attribute_name(:foto) %></th>
-      <th><%= model_class.human_attribute_name(:name) %></th>
+      <th><%= model_class.human_attribute_name(t(:name)) %></th>
       <th><%= model_class.human_attribute_name(:entrada) %></th>
       <th><%= model_class.human_attribute_name(:saída) %></th>
       <th><%= model_class.human_attribute_name(:saldo) %></th>
-      <th><%= model_class.human_attribute_name(:price) %></th>
+      <th><%= model_class.human_attribute_name(t(:price)) %></th>
       <th><%= model_class.human_attribute_name(:categoria) %></th>
       <th><%= model_class.human_attribute_name(:ativo) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>

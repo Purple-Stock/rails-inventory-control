@@ -28,7 +28,7 @@ class PurchaseProductsController < ApplicationController
 
     respond_to do |format|
       if @purchase_product.save
-        format.html { redirect_to @purchase_product, notice: 'Purchase product was successfully created.' }
+        format.html { redirect_to @purchase_product, notice: 'Entrada de estoque criado.' }
         format.json { render :show, status: :created, location: @purchase_product }
       else
         format.html { render :new }
@@ -42,7 +42,7 @@ class PurchaseProductsController < ApplicationController
   def update
     respond_to do |format|
       if @purchase_product.update(purchase_product_params)
-        format.html { redirect_to @purchase_product, notice: 'Purchase product was successfully updated.' }
+        format.html { redirect_to @purchase_product, notice: 'Entrada de estoque alterado.' }
         format.json { render :show, status: :ok, location: @purchase_product }
       else
         format.html { render :edit }
@@ -56,7 +56,7 @@ class PurchaseProductsController < ApplicationController
   def destroy
     @purchase_product.destroy
     respond_to do |format|
-      format.html { redirect_to purchase_products_url, notice: 'Purchase product was successfully destroyed.' }
+      format.html { redirect_to purchase_products_url, notice: 'Entrada de estoque deletado.' }
       format.json { head :no_content }
     end
   end

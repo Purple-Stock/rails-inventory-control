@@ -1,5 +1,32 @@
 ---
 pt-BR:
+  name: Nome
+  price: Preço
+  created_at: Data de criação
+  custom_id: Código do produto
+  cellphone: Celular
+  phone: Telefone Fixo
+  sale_id: Código da venda
+  Categories: Categorias
+  Category: Categoria
+  Purchase Products: Entradas de Estoque
+  Purchase Product: Entrada de Estoque
+  Sale Products: Saídas de Estoque
+  Sale Product: Saída de Estoque
+  Product: Produto
+  Products: Produtos
+  Sale: Venda
+  Sales: Vendas
+  Customers: Clientes
+  Customer: Cliente
+  category_id: Categoria
+  customer_id: Venda
+  active: Ativo
+  quantity: Quantidade
+  value: Valor
+  product_id: Produto
+  discount: Desconto
+  percentage: Porcentagem
   activerecord:
     errors:
       messages:
@@ -151,6 +178,17 @@ pt-BR:
       create: Criar %{model}
       submit: Salvar %{model}
       update: Atualizar %{model}
+    links:
+      new: Novo
+      edit: Editar
+      destroy: Deletar
+      cancel: Cancelar
+      back: Voltar
+      submit: Salvar %{model}
+      confirm: Você tem certeza?
+    titles:
+      new: Novo %{model}
+    actions: Ações
   number:
     currency:
       format:
