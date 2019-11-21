@@ -8,6 +8,8 @@ Rails.application.routes.draw do
   resources :products
   resources :customers
   resources :categories
+  resources :groups
+  resources :group_products
   get 'companies/new'
   post 'companies/create'
   devise_for :users

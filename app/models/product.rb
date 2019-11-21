@@ -2,6 +2,7 @@ class Product < ApplicationRecord
   belongs_to :category
   has_many :purchase_products
   has_many :sale_products
+  has_many :group_products
   has_one_attached :image
 
   def count_purchase_product

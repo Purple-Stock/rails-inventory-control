@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_11_13_013810) do
+ActiveRecord::Schema.define(version: 2019_11_21_004416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -69,6 +69,21 @@ ActiveRecord::Schema.define(version: 2019_11_13_013810) do
     t.datetime "updated_at", precision: 6, null: false
   end
 
+  create_table "group_products", force: :cascade do |t|
+    t.bigint "group_id"
+    t.bigint "product_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["group_id"], name: "index_group_products_on_group_id"
+    t.index ["product_id"], name: "index_group_products_on_product_id"
+  end
+
+  create_table "groups", force: :cascade do |t|
+    t.string "description"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
   create_table "products", force: :cascade do |t|
     t.string "name"
     t.float "price"
@@ -123,6 +138,7 @@ ActiveRecord::Schema.define(version: 2019_11_13_013810) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.integer "payment_type", default: 0
+    t.boolean "exchange", default: false
     t.index ["customer_id"], name: "index_sales_on_customer_id"
   end
 
@@ -154,6 +170,8 @@ ActiveRecord::Schema.define(version: 2019_11_13_013810) do
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "group_products", "groups"
+  add_foreign_key "group_products", "products"
   add_foreign_key "products", "categories"
   add_foreign_key "purchase_products", "products"
   add_foreign_key "purchase_products", "purchases"
