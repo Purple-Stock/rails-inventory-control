@@ -4,7 +4,7 @@ class PurchaseProductsController < ApplicationController
   # GET /purchase_products
   # GET /purchase_products.json
   def index
-    @purchase_products = PurchaseProduct.last 500
+    @purchase_products = PurchaseProduct.all
   end
 
   # GET /purchase_products/1
