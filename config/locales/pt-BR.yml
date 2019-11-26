@@ -25,7 +25,7 @@ pt-BR:
   quantity: Quantidade
   value: Valor
   product_id: Produto
-  discount: Desconto
+  discount: Desconto em R$
   percentage: Porcentagem
   activerecord:
     errors:
