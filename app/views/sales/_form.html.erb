@@ -72,6 +72,13 @@
     </div>
     <%=f.error_span(:disclosure) %>
   </div>
+  <div class="form-group">
+    <%= f.label :troca, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.check_box :exchange %>
+    </div>
+    <%=f.error_span(:exchange) %>
+  </div>
   
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-4">

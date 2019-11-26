@@ -13,5 +13,6 @@ Rails.application.routes.draw do
   get 'companies/new'
   post 'companies/create'
   devise_for :users
+  get 'group_lists', to: 'groups#show_group_product', as: 'show_group_product'
   root to: 'sales#index'
 end
