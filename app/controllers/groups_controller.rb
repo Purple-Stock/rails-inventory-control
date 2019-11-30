@@ -66,6 +66,10 @@ class GroupsController < ApplicationController
     @groups = Group.includes(group_products:[product:[:purchase_products]]).all
   end
 
+  def show_product_confection
+    @groups = Group.includes(group_products:[product:[:purchase_products]]).all
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_group
