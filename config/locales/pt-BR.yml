@@ -259,3 +259,16 @@ pt-BR:
       long: "%d de %B de %Y, %H:%M"
       short: "%d de %B, %H:%M"
     pm: ''
+
+  January: Janeiro
+  February: Fevereiro
+  March: Março
+  April: Abril
+  May: Maio
+  June: Junho
+  July: Julho
+  August: Agosto
+  September: Setembro
+  October: Outubro
+  November: Novembro
+  December: Dezembro
