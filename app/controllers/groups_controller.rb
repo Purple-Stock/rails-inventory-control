@@ -63,7 +63,7 @@ class GroupsController < ApplicationController
   end
 
   def show_group_product
-    @groups = Group.all
+    @groups = Group.includes(group_products:[product:[:purchase_products]]).all
   end
 
   private

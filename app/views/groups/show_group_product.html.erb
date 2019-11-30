@@ -1,0 +1,50 @@
+<br><br><br><br><br>
+<div class="container">
+  <div class="row">
+    <h2>Grupo de Produtos</h2>
+  </div>
+  <% @groups.each do |group|%>
+    <div class="col-sm-6 col-md-4">
+      <div class="thumbnail">
+        <table class="table table-bordered">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Nome</th>
+              <th>Entrada</th>
+              <th>Saída</th>
+              <th>Saldo</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% 
+              sum_purchase = 0
+              sum_sale = 0
+            %>
+            <% group.group_products.each do |group_product| %>
+                <%
+                  sum_purchase += group_product.product.count_purchase_product
+                  sum_sale += group_product.product.count_sale_product
+                %>
+                <tr>
+                  <td><%= group_product.product.custom_id %></td>
+                  <td><%= group_product.product.name %></td>
+                  <td><%= group_product.product.count_purchase_product %></td>
+                  <td><%= group_product.product.count_sale_product %></td>
+                  <td><%= group_product.product.count_purchase_product.to_i - group_product.product.count_sale_product.to_i %></td>
+                </tr>
+            <% end %>
+          </tbody>
+          <h3>Nome do Grupo: <%= group.description %></h3>
+          <table class="table table-bordered">
+            <tr>
+              <td>Entrada: <%= sum_purchase %></td>
+              <td>Saída: <%= sum_sale %></td>
+              <td>Saldo: <%= sum_purchase - sum_sale %></td>
+            </tr>
+          </table>
+        </table>
+      </div>
+    </div>
+  <% end %>
+</div>
