@@ -4,7 +4,7 @@ class PurchaseProductsController < ApplicationController
   # GET /purchase_products
   # GET /purchase_products.json
   def index
-    @purchase_products = PurchaseProduct.where(created_at: Time.now-1.month..Time.now)
+    @purchase_products = PurchaseProduct.last 1000
   end
 
   # GET /purchase_products/1
