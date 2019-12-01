@@ -39,11 +39,21 @@
         <h2><center><%= image_tag(group.group_products.first.product.image.attached? ? group.group_products.first.product.image : group.group_products.first.product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></center></h2>
         <table class="table table-bordered">
           <tr>
-            <td>Entrada Média: <%= total_purchase = (sum_purchase.to_f / group.months.to_f).round %></td>
-            <td>Saída Média: <%= total_sale = (sum_sale.to_f / group.months.to_f).round %></td>
+            <td>Entrada: <%= total_purchase = sum_purchase %></td>
+            <td>Saída: <%= total_sale = sum_sale%></td>
+            <td>Saldo: <%= total_purchase - total_sale %></td>
+          </tr>
+          <tr>
+            <td>Entrada Média <%=group.months - 1%> meses: <%= total_purchase = (sum_purchase.to_f / (group.months - 1).to_f).round %></td>
+            <td>Saída Média <%=group.months - 1%> meses: <%= total_sale = (sum_sale.to_f / (group.months - 1).to_f).round %></td>
+            <td>Saldo: <%= total_purchase - total_sale %></td>
+          </tr>
+          <tr>
+            <td>Entrada Média <%=group.months%> meses: <%= total_purchase = (sum_purchase.to_f / group.months.to_f).round %></td>
+            <td>Saída Média<%=group.months%> meses: <%= total_sale = (sum_sale.to_f / group.months.to_f).round %></td>
             <td>Saldo: <%= total_purchase - total_sale %></td>
           </tr>
       </table>
-    </div>
+   </div>
   <% end %>
 </div>
