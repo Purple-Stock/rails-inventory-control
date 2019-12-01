@@ -77,7 +77,7 @@ class GroupsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def group_params
-    params.fetch(:group).permit(:description,
+    params.fetch(:group).permit(:description, :months,
                                 group_products_attributes: %i[id product_id _destroy])
   end
 end
