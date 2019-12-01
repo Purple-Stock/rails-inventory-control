@@ -1,5 +1,5 @@
 class GroupsController < ApplicationController
-  before_action :set_group, only: [:show, :edit, :update, :destroy]
+  before_action :set_group, only: %i[show edit update destroy]
 
   # GET /groups
   # GET /groups.json
@@ -9,8 +9,7 @@ class GroupsController < ApplicationController
 
   # GET /groups/1
   # GET /groups/1.json
-  def show
-  end
+  def show; end
 
   # GET /groups/new
   def new
@@ -19,8 +18,7 @@ class GroupsController < ApplicationController
   end
 
   # GET /groups/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /groups
   # POST /groups.json
@@ -63,22 +61,23 @@ class GroupsController < ApplicationController
   end
 
   def show_group_product
-    @groups = Group.includes(group_products:[product:[:purchase_products]]).all
+    @groups = Group.includes(group_products: [product: [:purchase_products]]).all
   end
 
   def show_product_confection
-    @groups = Group.includes(group_products:[product:[:purchase_products]]).all
+    @groups = Group.includes(group_products: [product: [:purchase_products]]).all
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_group
-      @group = Group.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def group_params
-      params.fetch(:group).permit(:description, 
-                                  group_products_attributes: [:id, :product_id, :_destroy])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_group
+    @group = Group.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def group_params
+    params.fetch(:group).permit(:description,
+                                group_products_attributes: %i[id product_id _destroy])
+  end
 end
