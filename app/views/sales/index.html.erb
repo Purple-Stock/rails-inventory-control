@@ -27,15 +27,16 @@
         <td><%= sale.customer.name %></td>
         <td><%= sale.discount %></td>
         <td><%= sale.percentage %></td>
-        <td><%= sale.online %></td>
+        <td><%= sale.online ? 'Virtual' : 'Física'%> </td>
         <td><%= sale.value %></td>
-        <td><%= sale.disclosure %></td>
+        <td><%= sale.disclosure ? 'Sim' : 'Não' %></td>
         <td>
           <table>
             <% sale.sale_products.each do |ssp| %>
                 <tr>
                   <td><%= ssp.product.custom_id + '-' + ssp.product.name %></td>
                   <td><%= image_tag(ssp.product.image.attached? ? ssp.product.image : ssp.product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "50") %></td>
+                  <td><%= ssp.value %></td>
                 </tr>
             <% end %>
           </table>
