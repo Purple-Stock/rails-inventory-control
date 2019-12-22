@@ -15,6 +15,7 @@
       <th><%= model_class.human_attribute_name(:online) %></th>
       <th><%= model_class.human_attribute_name(:divulgacao) %></th>
       <th><%= model_class.human_attribute_name(:cliente) %></th>
+      <th><%= model_class.human_attribute_name(:produto_vendidos) %></th>
       <th><%= model_class.human_attribute_name(t(:created_at)) %></th>
       <th><%=t '.actions', :default => t("helpers.actions") %></th>
     </tr>
@@ -29,6 +30,16 @@
         <td><%= sale.online %></td>
         <td><%= sale.disclosure %></td>
         <td><%= sale.customer.name %></td>
+        <td>
+          <table>
+            <% sale.sale_products.each do |ssp| %>
+                <tr>
+                  <td><%= ssp.product.custom_id + '-' + ssp.product.name %></td>
+                  <td><%= image_tag(ssp.product.image.attached? ? ssp.product.image : ssp.product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "50") %></td>
+                </tr>
+            <% end %>
+          </table>
+        </td>
         <td><%=l sale.created_at %></td>
         <td>
           <%= link_to t('.edit', :default => t("helpers.links.edit")),
