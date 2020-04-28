@@ -1,0 +1,32 @@
+$(document).ready( function () {
+    $('#sale_customer_id').select2();
+    $('.form-control-sm').select2();
+    $( ".add_fields" ).click(function() {
+        setTimeout(function(){$('.form-control-sm').select2(); }, 1);
+    });
+} );
+
+onScan.attachTo(document, {
+    suffixKeyCodes: [13], // enter-key expected at the end of a scan
+    reactToPaste: true, // Compatibility to built-in scanners in paste-mode (as opposed to keyboard-mode)
+    onScan: function(sCode) { // Alternative to document.addEventListener('scan')
+    	console.log(sCode);
+        fetchProducts(sCode);
+    }
+});
+
+function fetchProducts(custom_qr) {
+    const custom_id = custom_qr.split('#');
+    console.log('/api/v1/products/' + custom_id[3]);
+    fetch('/api/v1/products/' + custom_id[3]).then(function (res) {
+        if (res.ok) {
+            return res.json();
+        }
+    }).then(function (data) {
+        console.log(data);
+        $('#sale_products').append('<%= j render 'sale_product_fields', animation: 'tetas' %>')
+
+    }).catch(function (err) {
+        return console.log(err);
+    });
+}

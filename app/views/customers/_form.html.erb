@@ -39,14 +39,14 @@
   <div class="form-group">
     <%= f.label t(:cellphone), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :cellphone, :class => 'form-control' %>
+      <%= f.telephone_field :cellphone, :class => 'form-control' %>
     </div>
     <%=f.error_span(:cellphone) %>
   </div>
   <div class="form-group">
     <%= f.label t(:phone), :class => 'control-label col-lg-2' %>
     <div class="col-lg-10">
-      <%= f.text_field :phone, :class => 'form-control' %>
+      <%= f.telephone_field :phone, :class => 'form-control' %>
     </div>
     <%=f.error_span(:phone) %>
   </div>
