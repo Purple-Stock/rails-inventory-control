@@ -44,6 +44,8 @@ gem 'rack-cors', :require => 'rack/cors'
 
 # Reduces boot times through caching; required in config/boot.rb
 gem 'bootsnap', '>= 1.1.0', require: false
+# qrcode gem
+gem('rqrcode_png', git: 'https://github.com/DCarper/rqrcode_png')
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

@@ -1,3 +1,5 @@
+require 'rqrcode_png'
+
 class Product < ApplicationRecord
   belongs_to :category
   has_many :purchase_products
@@ -39,6 +41,10 @@ class Product < ApplicationRecord
       sum += pp.quantity
     end
     sum
+  end
+
+  def self.generate_qrcode(url)
+    RQRCode::QRCode.new(url)
   end
 
 end
