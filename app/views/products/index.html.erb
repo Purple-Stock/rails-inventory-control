@@ -9,7 +9,6 @@
   <thead>
     <tr>
       <th><%= model_class.human_attribute_name(:codigo_produto) %></th>
-      <th>QR Code</th>
       <th><%= model_class.human_attribute_name(:foto) %></th>
       <th><%= model_class.human_attribute_name(t(:name)) %></th>
       <th><%= model_class.human_attribute_name(:entrada) %></th>
@@ -25,7 +24,6 @@
     <% @products.each do |product| %>
       <tr>
         <td><%= product.custom_id %></td>
-        <td><%= image_tag(Product.generate_qrcode("produto#" + product.name + "#custom_id#" + product.custom_id).to_img.resize(150, 150).to_data_url) %></td>
         <td><%= image_tag(product.image.attached? ? product.image : product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></td>
         <td><%= product.name %></td>
         <td><%= product.count_purchase_product %></td>
