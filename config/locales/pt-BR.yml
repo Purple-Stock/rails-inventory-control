@@ -184,6 +184,7 @@ pt-BR:
       destroy: Deletar
       cancel: Cancelar
       back: Voltar
+      show: Ver
       submit: Salvar %{model}
       confirm: Você tem certeza?
     titles:
