@@ -17,6 +17,11 @@ class PurchaseProductsController < ApplicationController
     @purchase_product = PurchaseProduct.new
   end
 
+  # GET /purchase_products/new_code_reader
+  def new_code_reader
+    @purchase_product = PurchaseProduct.new
+  end
+
   # GET /purchase_products/1/edit
   def edit
   end

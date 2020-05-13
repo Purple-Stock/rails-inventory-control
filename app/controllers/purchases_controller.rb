@@ -15,6 +15,7 @@ class PurchasesController < ApplicationController
   # GET /purchases/new
   def new
     @purchase = Purchase.new
+    @purchase_products = @purchase.purchase_products.build
   end
 
   # GET /purchases/1/edit
@@ -69,6 +70,9 @@ class PurchasesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_params
-      params.require(:purchase).permit(:value, :supplier_id)
+      params.require(:purchase).permit(:value, :supplier_id,
+                                        purchase_products_attributes: [:id, :product_id, 
+                                                                       :quantity, :value, 
+                                                                       :_destroy])
     end
 end
