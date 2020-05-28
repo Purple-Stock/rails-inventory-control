@@ -4,9 +4,7 @@ class ProductsController < ApplicationController
 
   # GET /products
   # GET /products.json
-  def index
-    @products = Product.includes(:purchase_products).where(active: true).limit(1)
-  end
+  def index; end
 
   def index_defer
     @products = Product.includes(:purchase_products, :sale_products, :category).where(active: true)
