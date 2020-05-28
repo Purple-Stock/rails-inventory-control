@@ -19,6 +19,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get 'products/:custom_id', to: 'products#show', as: 'show'
+      post 'purchase_products/add_products', to: 'purchase_products#add_products', as: 'add_products'
     end
   end
   get 'products_defer', to: "products#index_defer"
