@@ -5,7 +5,12 @@ class ProductsController < ApplicationController
   # GET /products
   # GET /products.json
   def index
+    @products = Product.includes(:purchase_products).where(active: true).limit(1)
+  end
+
+  def index_defer
     @products = Product.includes(:purchase_products).where(active: true)
+    render json: { data: @products }
   end
 
   # GET /products/1

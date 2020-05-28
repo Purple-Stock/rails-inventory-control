@@ -25,3 +25,10 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+.generators
+.idea/
+.rakeTasks
+latest.dump
+latest.dump.1
+latest.dump.2

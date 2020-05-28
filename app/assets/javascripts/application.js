@@ -32,6 +32,31 @@ $(document).ready( function () {
      	stateSave: true
     } );
 
+    $('#product-ajax').dataTable({
+        ajax: '/products_defer',
+        deferRender: true,
+        columns: [
+            { title: "Codigo Produto", data: 'custom_id'},
+            { title: "Foto", data: 'image_url', render: function(image_url){
+                if (image_url == null) {
+                    return '<img src="https://purple-stock.s3-sa-east-1.amazonaws.com/images.png">';
+                }else {
+                    return '<img src="'+ image_url + '">';
+                }
+            }
+            },
+            { title: "Price", data: 'price' }
+        ],
+        "language": {
+            "url": "https://cdn.datatables.net/plug-ins/1.10.12/i18n/Portuguese-Brasil.json"
+        },
+        columnDefs: [
+            { type: 'formatted-num', targets: 0 }
+        ],
+        "order": [[ 0, "desc" ]],
+        responsive: true
+    })
+
 
 	jQuery.extend( jQuery.fn.dataTableExt.oSort, {
 	    "formatted-num-pre": function ( a ) {

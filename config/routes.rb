@@ -21,4 +21,5 @@ Rails.application.routes.draw do
       get 'products/:custom_id', to: 'products#show', as: 'show'
     end
   end
+  get 'products_defer', to: "products#index_defer"
 end
