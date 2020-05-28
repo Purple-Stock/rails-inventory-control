@@ -12,7 +12,7 @@ class Api::V1::PurchaseProductsController < ActionController::Base
 			@targetrecords << purchase_product
 		end
 		if save_succeeded
-			render json: { status: 'success', message: 'Saved Purchase Product', data: @targetrecords.to_json }, status: :ok
+			render json: { status: 'success', message: 'Saved Purchase Product', data: @targetrecords }, status: :ok
 		else
 			render json: { status: 'error', message: 'Purchase Product not saved', data: @targetrecords }, status: :unprocessable_entity
 		end
