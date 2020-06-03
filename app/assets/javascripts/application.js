@@ -53,7 +53,7 @@ $(document).ready( function () {
             { title: "Categoria", data: 'attributes.category' },
             { title: "Ativo", data: 'attributes.active' },
             { title: "Ações", data: 'attributes.id', render: function(id){
-                let html= '<a class="btn btn-default btn-xs" href="/products/'+ id + '">Ver</a><a class="btn btn-default btn-xs" href="/products/'+ id + '/edit">Editar</a><a data-confirm="Você tem certeza?" data-method="delete" rel="nofollow" class="btn btn-danger btn-xs" href="/products/'+ id + '">Deletar</a>';
+                let html = '<a class="btn btn-default btn-xs" href="/products/'+ id + '">Ver</a><a class="btn btn-default btn-xs" href="/products/'+ id + '/edit">Editar</a><a data-confirm="Você tem certeza?" data-method="delete" rel="nofollow" class="btn btn-danger btn-xs" href="/products/'+ id + '">Deletar</a>';
                 return html
             }}
         ],
