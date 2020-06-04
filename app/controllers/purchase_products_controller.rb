@@ -7,6 +7,11 @@ class PurchaseProductsController < ApplicationController
     @purchase_products = PurchaseProduct.last 1000
   end
 
+  def index_defer
+    @purchase_products = PurchaseProduct.all
+    render json: PurchaseProductSerializer.new(@purchase_products).serialized_json
+  end
+
   # GET /purchase_products/1
   # GET /purchase_products/1.json
   def show
