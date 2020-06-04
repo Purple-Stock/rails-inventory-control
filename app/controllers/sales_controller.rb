@@ -4,13 +4,17 @@ class SalesController < ApplicationController
   # GET /sales
   # GET /sales.json
   def index
-    @sales = Sale.last 500
+    @sales = Sale.last 2
+  end
+
+  def index_defer
+    @sales = Sale.includes(:sale_products)
+    render json: SaleSerializer.new(@sales).serialized_json
   end
 
   # GET /sales/1
   # GET /sales/1.json
-  def show
-  end
+  def show; end
 
   # GET /sales/new
   def new
@@ -19,8 +23,7 @@ class SalesController < ApplicationController
   end
 
   # GET /sales/1/edit
-  def edit
-  end
+  def edit; end
 
   # POST /sales
   # POST /sales.json
