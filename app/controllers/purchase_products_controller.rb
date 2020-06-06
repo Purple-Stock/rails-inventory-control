@@ -3,9 +3,7 @@ class PurchaseProductsController < ApplicationController
 
   # GET /purchase_products
   # GET /purchase_products.json
-  def index
-    @purchase_products = PurchaseProduct.last 1000
-  end
+  def index; end
 
   def index_defer
     @purchase_products = PurchaseProduct.all
