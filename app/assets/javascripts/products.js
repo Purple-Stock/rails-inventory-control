@@ -6,11 +6,7 @@ $(document).ready( function () {
 	    columns: [
 	        { title: "Codigo Produto", data: 'attributes.custom_id' },
 	        { title: "Foto", data: 'attributes.image_url', render: function(image_url){
-	            if (image_url == null) {
-	                return '<img src="https://purple-stock.s3-sa-east-1.amazonaws.com/images.png" width="250px" height="163px">';
-	            }else {
 	                return '<img src="' + image_url + '"width="250px" height="163px">';
-	            }
 	        }
 	        },
 	        { title: "Preço", data: 'attributes.price' },
