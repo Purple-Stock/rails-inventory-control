@@ -19,7 +19,7 @@
   <dt><strong><%= model_class.human_attribute_name(:active) %>:</strong></dt>
   <dd><%= @product.active %></dd>
   <dt><strong>QR Code</strong></dt>
-  <dd><%= image_tag(Product.generate_qrcode("produto#" + @product.name + "#custom_id#" + @product.custom_id).to_img.resize(150, 150).to_data_url) %></dd>
+  <dd><%= image_tag(Product.generate_qrcode(@product).to_img.resize(150, 150).to_data_url) %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
