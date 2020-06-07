@@ -17,8 +17,7 @@ $(document).ready( function () {
     var product_data;
 
     function fetchProducts(custom_qr) {
-        const custom_id = custom_qr.split('#');
-        fetch('/api/v1/products/' + custom_id[3]).then(function (res) {
+        fetch('/api/v1/products/' + custom_qr.custom_id).then(function (res) {
             if (res.ok) {
                 return res.json();
             }
