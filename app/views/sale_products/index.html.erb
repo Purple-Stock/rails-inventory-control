@@ -22,7 +22,7 @@
     <% @sale_products.each do |sale_product| %>
       <tr>
         <td><%= link_to sale_product.id, sale_product_path(sale_product) %></td>
-        <td><%= image_tag(sale_product.product.image.attached? ? sale_product.product.image : sale_product.product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></td>
+        <td><%= image_tag(sale_product.product.image.attached? ? sale_product.product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></td>
         <td><%= sale_product.quantity %></td>
         <td><%= sale_product.value %></td>
         <td><%= sale_product.product.name %></td>

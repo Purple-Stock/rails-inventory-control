@@ -16,7 +16,7 @@ class ProductSerializer
   end  
 
   attribute :image_url do |object|
-    object.image.attached? ? Rails.application.routes.url_helpers.rails_blob_path(object.image, only_path: true) : object.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png"
+    object.image.attached? ? Rails.application.routes.url_helpers.rails_blob_path(object.image, only_path: true) : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png"
   end
 
   attribute :active do |object|

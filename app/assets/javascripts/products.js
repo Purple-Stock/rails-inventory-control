@@ -6,8 +6,8 @@ $(document).ready( function () {
 	    columns: [
 	        { title: "Codigo Produto", data: 'attributes.custom_id' },
 	        { title: "Foto", data: 'attributes.image_url', render: function(image_url){
-	                return '<img src="' + image_url + '"width="250px" height="163px">';
-	        }
+	            	return '<img src="' + image_url + '"width="250px" height="163px">';
+	        	}
 	        },
 	        { title: "Preço", data: 'attributes.price' },
 	        { title: "Nome", data: 'attributes.name' },

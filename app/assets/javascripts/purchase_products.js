@@ -6,13 +6,9 @@ $(document).ready( function () {
         columns: [
             { title: "Código Produto", data: 'attributes.custom_id' },
            	{ title: "Foto", data: 'attributes.image_url', render: function(image_url){
-	            if (image_url == null) {
-	                return '<img src="https://purple-stock.s3-sa-east-1.amazonaws.com/images.png" width="150px" height="150px">';
-	            }else {
-	                return '<img src="' + image_url + '"width="250px" height="163px">';
-	            }
-	        }
-	        },
+                    return '<img src="' + image_url + '"width="250px" height="163px">';
+                }
+            },
             { title: "Quantidade", data: 'attributes.quantity' },
             { title: "Valor", data: 'attributes.value' },
             { title: "Nome Produto", data: 'attributes.name' },
