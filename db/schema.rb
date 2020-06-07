@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_12_01_042649) do
+ActiveRecord::Schema.define(version: 2020_06_07_193928) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,7 +82,6 @@ ActiveRecord::Schema.define(version: 2019_12_01_042649) do
     t.string "name"
     t.float "price"
     t.string "bar_code"
-    t.string "image_url"
     t.boolean "highlight"
     t.bigint "category_id"
     t.boolean "active"
