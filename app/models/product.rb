@@ -44,7 +44,8 @@ class Product < ApplicationRecord
   end
 
   def self.generate_qrcode(url)
-    RQRCode::QRCode.new(url)
+    obj = { id: url.id, custom_id: url.custom_id, name: url.name, price: url.price }
+    RQRCode::QRCode.new(obj.to_json)
   end
 
 end
