@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!, only: [:index_defer]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
