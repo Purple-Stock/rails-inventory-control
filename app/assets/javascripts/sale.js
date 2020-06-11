@@ -8,9 +8,38 @@ $(document).ready( function () {
 
     onScan.attachTo(document, {
         suffixKeyCodes: [13], // enter-key expected at the end of a scan
-        reactToPaste: true, // Compatibility to built-in scanners in paste-mode (as opposed to keyboard-mode)
+        // onKeyProcess: function(sChar, oEvent){
+        //     console.log(sChar);
+        //     console.log(oEvent);
+        //     console.log(oEvent.keyCode);
+        // },
+        keyCodeMapper: function(oEvent) {
+            // Look for special keycodes or other event properties specific to
+            // your scanner
+            if (oEvent.which == 219) {
+                return '{';
+            }else if (oEvent.which == 221) {
+                return '}';
+            }else if (oEvent.which == 186) {
+                return ':';            
+            }else if (oEvent.which == 188) {
+                return ',';
+            }else if (oEvent.which == 222) {
+                return '"';            
+            }else if (oEvent.which == 189) {
+                return '_';
+            }else if (oEvent.which == 32) {
+                return ' ';
+            }else if (oEvent.which == 190) {
+                return '.';
+            }else{
+                // Fall back to the default decoder in all other cases
+                return onScan.decodeKeyEvent(oEvent);
+            }
+        },
         onScan: function(sCode) { // Alternative to document.addEventListener('scan')
-            fetchProducts(sCode);
+            // console.log(sCode);
+            fetchProducts(JSON.parse(sCode));
         }
     });
 

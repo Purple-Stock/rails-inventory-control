@@ -11,7 +11,7 @@
   <dt><strong><%= model_class.human_attribute_name(:bar_code) %>:</strong></dt>
   <dd><%= @product.bar_code %></dd>
   <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
-  <dd><%= image_tag(@product.image.attached? ? @product.image : @product.image_url || "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd>
+  <dd><%= image_tag(@product.image.attached? ? @product.image : "https://purple-stock.s3-sa-east-1.amazonaws.com/images.png", size: "150") %></dd>
   <dt><strong><%= model_class.human_attribute_name(:highlight) %>:</strong></dt>
   <dd><%= @product.highlight %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
