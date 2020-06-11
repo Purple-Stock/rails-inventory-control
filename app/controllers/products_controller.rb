@@ -1,5 +1,6 @@
 class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token
+  skip_before_action :authenticate_user!, only: [:index_defer]
   before_action :set_product, only: [:show, :edit, :update, :destroy]
 
   # GET /products
@@ -71,6 +72,6 @@ class ProductsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def product_params
-      params.require(:product).permit(:name, :price, :bar_code, :image_url, :highlight, :category_id, :active, :image, :custom_id )
+      params.require(:product).permit(:name, :price, :bar_code, :highlight, :category_id, :active, :image, :custom_id )
     end
 end
