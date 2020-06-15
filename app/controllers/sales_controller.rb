@@ -3,12 +3,10 @@ class SalesController < ApplicationController
 
   # GET /sales
   # GET /sales.json
-  def index
-    @sales = Sale.last 2
-  end
+  def index; end
 
   def index_defer
-    @sales = Sale.includes(:sale_products)
+    @sales = Sale.includes(:sale_products).last 1000
     render json: SaleSerializer.new(@sales).serialized_json
   end
 

@@ -8,7 +8,7 @@ class ProductsController < ApplicationController
   def index; end
 
   def index_defer
-    @products = Product.includes(:purchase_products, :sale_products, :category).where(active: true)
+    @products = Product.includes(:purchase_products, :sale_products, :category).where(active: true).last 1000
     render json: ProductSerializer.new(@products).serialized_json
   end
 
