@@ -6,7 +6,7 @@ class SalesController < ApplicationController
   def index; end
 
   def index_defer
-    @sales = Sale.includes(:sale_products).last 1000
+    @sales = Sale.includes(:sale_products)
     render json: SaleSerializer.new(@sales).serialized_json
   end
 

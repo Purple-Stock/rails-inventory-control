@@ -1,0 +1,18 @@
+<table id="order_table" class="table-striped table-bordered table-responsive">
+  <thead>
+    <tr>
+      <th>Id Pedido</th>
+      <th>Name</th>
+      <th>Data do pedido</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @orders.each_with_index do |order, index| %>
+      <tr>
+        <td><%= order[index]["Wspedido"]["numero"] %></td>
+        <td><%= order[index]["Wspedido"]["cliente_razaosocial"] %></td>
+        <td><%= order[index]["Wspedido"]["data_pedido"] %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

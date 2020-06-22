@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!, only: [:index_defer]
-  before_action :set_product, only: [:show, :edit, :update, :destroy]
+  before_action :set_product, only: %i[show edit update destroy]
 
   # GET /products
   # GET /products.json
@@ -63,15 +65,17 @@ class ProductsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_product
-      @product = Product.find(params[:id])
-    end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def product_params
-      params.require(:product).permit(:name, :price, :bar_code, :highlight, :category_id, :active, :image, :custom_id )
-    end
+  private
+
+  # Use callbacks to share common setup or constraints between actions.
+  def set_product
+    @product = Product.find(params[:id])
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def product_params
+    params.require(:product).permit(:name, :price, :bar_code, :highlight,
+                                    :category_id, :active, :image, :custom_id, :sku)
+  end
 end

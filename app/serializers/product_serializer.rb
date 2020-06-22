@@ -1,7 +1,7 @@
 class ProductSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :id, :custom_id, :name, :count_purchase_product, :count_sale_product, :active
+  attributes :id, :custom_id, :name, :count_purchase_product, :count_sale_product, :active, :sku
 
   attribute :price do |object|
     "R$ #{object.price}"
