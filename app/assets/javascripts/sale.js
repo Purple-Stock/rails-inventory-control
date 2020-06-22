@@ -72,6 +72,7 @@ $(document).ready( function () {
             { title: "Desconto em R$", data: 'attributes.discount' },
             { title: "Porcentagem", data: 'attributes.percentage' },
             { title: "Online", data: 'attributes.online' },
+            { title: "Código Pedido Online", data: 'attributes.order_code' },
             { title: "Valor", data: 'attributes.value' },
             { title: "Divulgação", data: 'attributes.disclosure' },
             { title: "Valor", data: 'attributes.value' },

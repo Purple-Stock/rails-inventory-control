@@ -1,7 +1,7 @@
 class SaleSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :id
+  attributes :id, :order_code
 
   attribute :name do |object|
     object.customer.name.capitalize

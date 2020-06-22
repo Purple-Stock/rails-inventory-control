@@ -64,6 +64,13 @@
       <%= f.check_box :online %>
     </div>
     <%=f.error_span(:online) %>
+  </div>  
+  <div class="form-group">
+    <%= f.label t(:order_code), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :order_code %>
+    </div>
+    <%=f.error_span(:order_code) %>
   </div>
   <div class="form-group">
     <%= f.label :divulgação, :class => 'control-label col-lg-2' %>

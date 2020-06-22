@@ -26,6 +26,7 @@ pt-BR:
   value: Valor
   product_id: Produto
   discount: Desconto em R$
+  order_code: Código Pedido
   percentage: Porcentagem
   activerecord:
     errors:
