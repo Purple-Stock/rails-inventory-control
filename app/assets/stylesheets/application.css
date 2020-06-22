@@ -23,8 +23,9 @@
     border-color: #8A2BE2;
 }
 
-.navbar-default .navbar-nav>li>a {
-    color: #fff;
+.navbar-default .navbar-nav > li > a {
+    color: #000000
+;
 }
 
 body {
