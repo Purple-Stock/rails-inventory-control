@@ -18,6 +18,7 @@ Rails.application.routes.draw do
   devise_for :users
   get 'group_lists', to: 'groups#show_group_product', as: 'show_group_product'
   get 'confection_lists', to: 'groups#show_product_confection', as: 'show_product_confection'
+  get 'orders_control', to: 'orders_control#show_orders_control', as: 'show_orders_control'
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get 'products/:custom_id', to: 'products#show', as: 'show'

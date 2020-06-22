@@ -6,10 +6,16 @@
 <dl class="dl-horizontal">
   <dt><strong><%= model_class.human_attribute_name(:custom_id) %>:</strong></dt>
   <dd><%= @product.custom_id %></dd>
+  <dt><strong><%= model_class.human_attribute_name(:sku) %>:</strong></dt>
+  <dd><%= @product.sku %></dd>  
   <dt><strong><%= model_class.human_attribute_name(:name) %>:</strong></dt>
   <dd><%= @product.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:price) %>:</strong></dt>
-  <dd><%= @product.price %></dd>
+  <dd><%= @product.price %></dd>  
+  <dt><strong>Entrada:</strong></dt>
+  <dd><%= @product.count_purchase_product %></dd>
+  <dt><strong>Saída:</strong></dt>
+  <dd><%= @product.count_sale_product %></dd>
   <dt><strong><%= model_class.human_attribute_name(:bar_code) %>:</strong></dt>
   <dd><%= @product.bar_code %></dd>
   <dt><strong><%= model_class.human_attribute_name(:image) %>:</strong></dt>
@@ -17,11 +23,11 @@
   <dt><strong><%= model_class.human_attribute_name(:highlight) %>:</strong></dt>
   <dd><%= @product.highlight %></dd>
   <dt><strong><%= model_class.human_attribute_name(:category_id) %>:</strong></dt>
-  <dd><%= @product.category_id %></dd>
+  <dd><%= @product.category.name %></dd>
   <dt><strong><%= model_class.human_attribute_name(:active) %>:</strong></dt>
   <dd><%= @product.active %></dd>
   <dt><strong>QR Code</strong></dt>
-  <dd><%= image_tag(Product.generate_qrcode(@product).to_img.resize(150, 150).to_data_url) %></dd>
+  <dd><%= image_tag(Product.generate_qrcode(@product).to_img.resize(300, 300).to_data_url) %></dd>
 </dl>
 
 <%= link_to t('.back', :default => t("helpers.links.back")),
