@@ -27,6 +27,7 @@ class Sale < ApplicationRecord
                            created_at: DateTime.parse(order['result']['Wspedido']['data_pedido']),
                            order_code: order['result']['Wspedido']['id'],
                            value: order['result']['Wspedido']['total_produtos'],
+                           discount: order['result']['Wspedido']['total_descontos'],
                            payment_type: order['result']['Pagamento']['integrador'] == 'Depósito Bancário' ? 'Depósito' : 'Crédito')
         order['result']['Item'].each do |item|
           product = Product.where(sku: item['sku']).first
