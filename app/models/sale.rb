@@ -25,7 +25,7 @@ class Sale < ApplicationRecord
         sale = Sale.create(online: true,
                            customer_id: customer.id,
                            created_at: DateTime.parse(order['result']['Wspedido']['data_pedido']),
-                           order_code: order['result']['Wspedido']['id'],
+                           order_code: order['result']['Wspedido']['numero'],
                            value: order['result']['Wspedido']['total_produtos'],
                            discount: order['result']['Wspedido']['total_descontos'],
                            payment_type: order['result']['Pagamento']['integrador'] == 'Depósito Bancário' ? 'Depósito' : 'Crédito')
