@@ -24,7 +24,7 @@ class Sale < ApplicationRecord
       if customer.present?
         sale = Sale.create(online: true,
                            customer_id: customer.id,
-                           created_at: Time.parse(order['result']['Wspedido']['data_pedido']),
+                           created_at: DateTime.parse(order['result']['Wspedido']['data_pedido']),
                            order_code: order['result']['Wspedido']['id'],
                            value: order['result']['Wspedido']['total_produtos'],
                            discount: order['result']['Wspedido']['total_descontos'],
