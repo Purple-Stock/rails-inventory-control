@@ -66,6 +66,21 @@ class ProductsController < ApplicationController
     end
   end
 
+  def duplicate
+    @product = Product.find(params[:id])
+
+    respond_to do |format|
+      if @product != nil?
+        product_clone = @product.dup
+        product_clone.name = "#{product_clone.name} Cópia"
+        product_clone.save
+        format.html { redirect_to products_path, notice: 'Cópia Produto feito com sucesso.' }
+      else
+        flash[:alert] = "Erro, tente novamente"
+      end
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
