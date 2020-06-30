@@ -33,7 +33,7 @@ class OrdersControlController < ApplicationController
                          value: doc.css('table td')[data_position[:value]].text.gsub(',', '.').to_f,
                          send_date: date,
                          post_type: post_type)
-        (1..doc.css('table td').count/12-3).each do |i|
+        (1..doc.css('table td').count/9).each do |i|
 
           if doc.css('table td')[data_position[:client_name]+12].text.to_f == 0.0
             PostDatum.create(client_name: doc.css('table td')[data_position[:client_name]+= 12].text.capitalize,
