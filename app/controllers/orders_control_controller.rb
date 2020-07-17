@@ -3,8 +3,8 @@
 class OrdersControlController < ApplicationController
   def show_orders_control
     @send_orders = []
-    # list_orders
-    unique_order
+    list_orders
+    # unique_order
     @orders.each do |order|
       # if order['Wspedido']['pedidostatus_id'] == '23' || order['Wspedido']['pedidostatus_id'] == '3'
         @send_orders << order
@@ -62,7 +62,7 @@ class OrdersControlController < ApplicationController
 
   def list_orders
     @orders = []
-    (1..5).each do |i|
+    (1..10).each do |i|
       @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?page=#{i}",
                                  headers: { content: 'application/json',
                                             Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })

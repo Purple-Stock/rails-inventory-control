@@ -38,6 +38,13 @@
 
   <h4>Dados da Venda</h4>
   <div class="form-group">
+    <%= f.label :local_venda, :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= select("sale", "payment_type", Sale.store_sales.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>
+    </div>
+    <%=f.error_span(:disclosure) %>
+  </div>
+    <div class="form-group">
     <%= f.label :tipo_de_pagamento, :class => 'control-label col-lg-2' %>
     <div class="col-lg-4">
       <%= select("sale", "payment_type", Sale.payment_types.keys.to_a , {},{ include_blank: true, class: 'form-control form-control-sm' }) %>

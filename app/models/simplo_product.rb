@@ -1,7 +1,7 @@
 class SimploProduct < ApplicationRecord
 
   def simplo_products
-    @products = HTTParty.get("https://purchasestore.com.br/ws/wsprodutos.json?page=2",
+    @products = HTTParty.get("https://purchasestore.com.br/ws/wsprodutos.json?page=1",
                headers: { content: 'application/json',
                           Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' 
                         })
