@@ -3,8 +3,8 @@
 class OrdersControlController < ApplicationController
   def show_orders_control
     @send_orders = []
-    # list_orders
-    unique_order
+    list_orders
+    # unique_order
     @orders.each do |order|
       # if order['Wspedido']['pedidostatus_id'] == '23' || order['Wspedido']['pedidostatus_id'] == '3'
         @send_orders << order
@@ -33,7 +33,7 @@ class OrdersControlController < ApplicationController
                          value: doc.css('table td')[data_position[:value]].text.gsub(',', '.').to_f,
                          send_date: date,
                          post_type: post_type)
-        (1..doc.css('table td').count/12-3).each do |i|
+        (1..doc.css('table td').count/9).each do |i|
 
           if doc.css('table td')[data_position[:client_name]+12].text.to_f == 0.0
             PostDatum.create(client_name: doc.css('table td')[data_position[:client_name]+= 12].text.capitalize,
@@ -62,7 +62,7 @@ class OrdersControlController < ApplicationController
 
   def list_orders
     @orders = []
-    (1..5).each do |i|
+    (1..10).each do |i|
       @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?page=#{i}",
                                  headers: { content: 'application/json',
                                             Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })

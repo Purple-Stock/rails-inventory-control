@@ -8,11 +8,19 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   def count_purchase_product
-    sum = 0
+    rs = 0
+    sp = 0
+    h = 0
     self.purchase_products.each do |pp|
-      sum += pp.quantity
+      if pp.store_entrance == 'PurchaseStoreRS'
+        rs += pp.quantity
+      elsif pp.store_entrance == 'PurchaseStoreSP'
+        sp += pp.quantity
+      else
+        h += pp.quantity
+      end
     end
-    sum
+    "RS: #{rs}  SP: #{sp}"
   end
 
   def count_month_purchase_product(year, month)
@@ -36,11 +44,44 @@ class Product < ApplicationRecord
   end
 
   def count_sale_product
-    sum = 0
+    rs = 0
+    sp = 0
+    h = 0
     self.sale_products.each do |pp|
-      sum += pp.quantity
+      if pp.sale.store_sale == 'PurchaseStoreRS'
+        rs += pp.quantity
+      elsif pp.sale.store_sale == 'PurchaseStoreSP'
+        sp += pp.quantity
+      else
+        h += pp.quantity
+      end
     end
-    sum
+    "RS: #{rs}  SP: #{sp}"
+  end
+
+  def balance
+    rs = 0
+    sp = 0
+    h = 0
+    self.purchase_products.each do |pp|
+      if pp.store_entrance == 'PurchaseStoreRS'
+        rs += pp.quantity
+      elsif pp.store_entrance == 'PurchaseStoreSP'
+        sp += pp.quantity
+      else
+        h += pp.quantity
+      end
+    end
+    self.sale_products.each do |pp|
+      if pp.sale.store_sale == 'PurchaseStoreRS'
+        rs -= pp.quantity
+      elsif pp.sale.store_sale == 'PurchaseStoreSP'
+        sp -= pp.quantity
+      else
+        h -= pp.quantity
+      end
+    end
+    "RS: #{rs}  SP: #{sp}"
   end
 
   def self.generate_qrcode(url)
