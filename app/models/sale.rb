@@ -7,8 +7,9 @@ class Sale < ApplicationRecord
   enum payment_type: %i[Débito Crédito Dinheiro Débito_Dinheiro Crédito_Dinheiro Depósito Boleto]
   enum store_sale: %i[Sem_Loja PurchaseStoreRS PurchaseStoreSP]
 
-  def self.integrate_orders(id)
+  def self.integrate_orders(id, store_sale)
     sale = Sale.where(order_code: id).first
+    id = (id.to_i + 1).to_s
     if sale.nil?
       order = HTTParty.get("https://purchasestore.com.br/ws/wspedidos/#{id}.json?",
                            headers: { content: 'application/json',
@@ -29,9 +30,10 @@ class Sale < ApplicationRecord
                            order_code: order['result']['Wspedido']['numero'],
                            value: order['result']['Wspedido']['total_produtos'],
                            discount: order['result']['Wspedido']['total_descontos'],
-                           payment_type: order['result']['Pagamento']['integrador'] == 'Depósito Bancário' ? 'Depósito' : 'Crédito')
+                           payment_type: order['result']['Pagamento']['integrador'] == 'Depósito Bancário' ? 'Depósito' : 'Crédito',
+                           store_sale: store_sale)
         order['result']['Item'].each do |item|
-          product = Product.where(sku: item['sku']).first
+          product = Product.where(sku: item['sku']).or(Product.where(extra_sku: item['sku'])).first
           if product.present?
             SaleProduct.create(quantity: item['quantidade'], value: item['valor_total'].to_f, product_id: product.id, sale_id: sale.id)
           else
