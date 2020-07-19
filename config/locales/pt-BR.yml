@@ -25,6 +25,7 @@ pt-BR:
   quantity: Quantidade
   value: Valor
   product_id: Produto
+  store_entrance: Local Entrada
   discount: Desconto em R$
   order_code: Código Pedido
   percentage: Porcentagem
