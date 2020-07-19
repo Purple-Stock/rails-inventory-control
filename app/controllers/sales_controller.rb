@@ -64,6 +64,18 @@ class SalesController < ApplicationController
     end
   end
 
+  def insert_orders; end
+
+  def save_orders
+    number_orders = params[:number_orders].delete(' ').split(",")
+    number_orders.each do |no|
+      Sale.integrate_orders(no, params[:sale][:origin])
+    end
+    respond_to do |format|
+      format.html { redirect_to sales_url, notice: 'Venda Integrada com sucesso.' }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_sale

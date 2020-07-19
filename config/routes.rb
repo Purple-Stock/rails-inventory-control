@@ -6,6 +6,8 @@ Rails.application.routes.draw do
   resources :suppliers
   resources :sales
   get 'sales_defer', to: 'sales#index_defer'
+  get 'insert_orders', to: 'sales#insert_orders', as: 'insert_orders'
+  post 'save_orders', to: 'sales#save_orders', as: 'save_orders'
   resources :sale_products
   resources :products
   get 'products_defer', to: 'products#index_defer'
