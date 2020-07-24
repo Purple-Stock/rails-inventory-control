@@ -8,6 +8,7 @@
       <th>Nome</th>
       <th>Cidade</th>
       <th>Estado</th>
+      <th>CEP</th>
       <th>Valor Total</th>
       <th>Data do pedido</th>
       <th>Status</th>
@@ -20,6 +21,7 @@
         <td><%= order["Wspedido"]["cliente_razaosocial"] %></td>
         <td><%= order["Wspedido"]["entrega_cidade"] %></td>
         <td><%= order["Wspedido"]["entrega_estado"] %></td>
+        <td><%= order["Wspedido"]["cliente_cep"] %></td>
         <td><%= order["Wspedido"]["total_pedido"] %></td>
         <td><%= DateTime.parse(order["Wspedido"]["data_pedido"]).strftime("%-d/%-m/%y %H:%M") %></td>
         <td><%= order["Wspedido"]["pedidostatus_id"] %></td>
