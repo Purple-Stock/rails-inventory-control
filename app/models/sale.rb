@@ -6,7 +6,7 @@ class Sale < ApplicationRecord
   accepts_nested_attributes_for :sale_products, reject_if: :all_blank, allow_destroy: true
   enum payment_type: %i[Débito Crédito Dinheiro Débito_Dinheiro Crédito_Dinheiro Depósito Boleto]
   enum store_sale: %i[Sem_Loja PurchaseStoreRS PurchaseStoreSP]
-
+  scope :from_store, -> (store = self.store_sales["Sem_Loja"]) {where("store_sale = ?", store)}
   def self.integrate_orders(id, store_sale)
     sale = Sale.where(order_code: id).first
     id = (id.to_i + 1).to_s
