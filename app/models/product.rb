@@ -8,18 +8,21 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   def count_purchase_product
-    rs = 0
-    sp = 0
-    h = 0
-    self.purchase_products.each do |pp|
-      if pp.store_entrance == 'PurchaseStoreRS'
-        rs += pp.quantity
-      elsif pp.store_entrance == 'PurchaseStoreSP'
-        sp += pp.quantity
-      else
-        h += pp.quantity
-      end
-    end
+    # rs = 0
+    # sp = 0
+    # h = 0
+    # self.purchase_products.each do |pp|
+    #   if pp.store_entrance == 'PurchaseStoreRS'
+    #     rs += pp.quantity
+    #   elsif pp.store_entrance == 'PurchaseStoreSP'
+    #     sp += pp.quantity
+    #   else
+    #     h += pp.quantity
+    #   end
+    # end
+    rs = self.purchase_products.from_store("PurchaseStoreRS").sum("Quantity")
+    sp = self.purchase_products.from_store("PurchaseStoreSP").sum("Quantity")
+    #h = self.purchase_products.from_store("Sem_Loja").sum("Quantity")
     "RS: #{rs}  SP: #{sp}"
   end
 
@@ -44,43 +47,50 @@ class Product < ApplicationRecord
   end
 
   def count_sale_product
-    rs = 0
-    sp = 0
-    h = 0
-    self.sale_products.each do |pp|
-      if pp.sale.store_sale == 'PurchaseStoreRS'
-        rs += pp.quantity
-      elsif pp.sale.store_sale == 'PurchaseStoreSP'
-        sp += pp.quantity
-      else
-        h += pp.quantity
-      end
-    end
+    # rs = 0
+    # sp = 0
+    # h = 0
+    # self.sale_products.each do |pp|
+    #   if pp.sale.store_sale == 'PurchaseStoreRS'
+    #     rs += pp.quantity
+    #   elsif pp.sale.store_sale == 'PurchaseStoreSP'
+    #     sp += pp.quantity
+    #   else
+    #     h += pp.quantity
+    #   end
+    # end
+    rs ||= self.sale_products.from_sale_store("PurchaseStoreRS").sum("Quantity")
+    sp ||= self.sale_products.from_sale_store("PurchaseStoreSP").sum("Quantity")
+    #h ||= self.sale_products.from_sale_store("Sem_Loja").sum("Quantity")
     "RS: #{rs}  SP: #{sp}"
   end
 
   def balance
-    rs = 0
-    sp = 0
-    h = 0
-    self.purchase_products.each do |pp|
-      if pp.store_entrance == 'PurchaseStoreRS'
-        rs += pp.quantity
-      elsif pp.store_entrance == 'PurchaseStoreSP'
-        sp += pp.quantity
-      else
-        h += pp.quantity
-      end
-    end
-    self.sale_products.each do |pp|
-      if pp.sale.store_sale == 'PurchaseStoreRS'
-        rs -= pp.quantity
-      elsif pp.sale.store_sale == 'PurchaseStoreSP'
-        sp -= pp.quantity
-      else
-        h -= pp.quantity
-      end
-    end
+    # rs = 0
+    # sp = 0
+    # h = 0
+    # self.purchase_products.each do |pp|
+    #   if pp.store_entrance == 'PurchaseStoreRS'
+    #     rs += pp.quantity
+    #   elsif pp.store_entrance == 'PurchaseStoreSP'
+    #     sp += pp.quantity
+    #   else
+    #     h += pp.quantity
+    #   end
+    # end
+    # self.sale_products.each do |pp|
+    #   if pp.sale.store_sale == 'PurchaseStoreRS'
+    #     rs -= pp.quantity
+    #   elsif pp.sale.store_sale == 'PurchaseStoreSP'
+    #     sp -= pp.quantity
+    #   else
+    #     h -= pp.quantity
+    #   end
+    # end
+    rs = self.purchase_products.from_store("PurchaseStoreRS").sum("Quantity")
+    sp = self.purchase_products.from_store("PurchaseStoreSP").sum("Quantity")
+    rs -= self.sale_products.from_sale_store("PurchaseStoreRS").sum("Quantity")
+    sp -= self.sale_products.from_sale_store("PurchaseStoreSP").sum("Quantity")
     "RS: #{rs}  SP: #{sp}"
   end
 
