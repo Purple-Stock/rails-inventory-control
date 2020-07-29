@@ -4,14 +4,34 @@ class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token
   skip_before_action :authenticate_user!, only: [:index_defer]
   before_action :set_product, only: %i[show edit update destroy]
-
+  include Pagy::Backend
   # GET /products
   # GET /products.json
   def index; end
 
+  def index_tables
+    lines = Product.datatable_filter(params['search']['value'], params['columns']).includes(:purchase_products, :sale_products, :category).where(active: true).limit
+    lines_filtered = lines.count
+
+    render json: { lines: ProductSerializer.new(lines).serialized_json,
+                   draw: params['draw'].to_i,
+                   recordsTotal: Product.count,
+                   recordsFiltered: lines_filtered }
+  end
+
   def index_defer
-    @products = Product.includes(:purchase_products, :sale_products, :category).where(active: true).last 1385
-    render json: ProductSerializer.new(@products).serialized_json
+    @pagy, @products = pagy(Product.datatable_filter(params['search']['value'], datatable_searchable_columns ).includes(:purchase_products, :sale_products, :category).where(active: true),
+                            page: (params[:start].to_i / params[:length].to_i + 1),
+                            items: params[:length].to_i)
+    @products = @products.datatable_order(params['order']['0']['column'].to_i,
+                                                params['order']['0']['dir'])
+    options = {}
+    options[:meta] = {
+        draw: params['draw'].to_i,
+        recordsTotal: Product.datatable_filter(params['search']['value'], datatable_searchable_columns ).where(active: true).count,
+        recordsFiltered: Product.datatable_filter(params['search']['value'], datatable_searchable_columns ).where(active: true).count
+    }
+    render json:   ProductSerializer.new(@products, options).serialized_json
   end
 
   # GET /products/1
@@ -93,4 +113,9 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:name, :price, :bar_code, :highlight,
                                     :category_id, :active, :image, :custom_id, :sku, :extra_sku)
   end
+
+  def datatable_searchable_columns
+    {"0" => { "searchable" => true }, "1" => { "searchable" => true } }
+  end
+
 end

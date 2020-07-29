@@ -8,18 +8,8 @@ class Product < ApplicationRecord
   has_one_attached :image
 
   def count_purchase_product
-    rs = 0
-    sp = 0
-    h = 0
-    self.purchase_products.each do |pp|
-      if pp.store_entrance == 'PurchaseStoreRS'
-        rs += pp.quantity
-      elsif pp.store_entrance == 'PurchaseStoreSP'
-        sp += pp.quantity
-      else
-        h += pp.quantity
-      end
-    end
+    rs = self.purchase_products.from_store("PurchaseStoreRS").sum("Quantity")
+    sp = self.purchase_products.from_store("PurchaseStoreSP").sum("Quantity")
     "RS: #{rs}  SP: #{sp}"
   end
 
@@ -44,43 +34,16 @@ class Product < ApplicationRecord
   end
 
   def count_sale_product
-    rs = 0
-    sp = 0
-    h = 0
-    self.sale_products.each do |pp|
-      if pp.sale.store_sale == 'PurchaseStoreRS'
-        rs += pp.quantity
-      elsif pp.sale.store_sale == 'PurchaseStoreSP'
-        sp += pp.quantity
-      else
-        h += pp.quantity
-      end
-    end
+    rs ||= self.sale_products.from_sale_store("PurchaseStoreRS").sum("Quantity")
+    sp ||= self.sale_products.from_sale_store("PurchaseStoreSP").sum("Quantity")
     "RS: #{rs}  SP: #{sp}"
   end
 
   def balance
-    rs = 0
-    sp = 0
-    h = 0
-    self.purchase_products.each do |pp|
-      if pp.store_entrance == 'PurchaseStoreRS'
-        rs += pp.quantity
-      elsif pp.store_entrance == 'PurchaseStoreSP'
-        sp += pp.quantity
-      else
-        h += pp.quantity
-      end
-    end
-    self.sale_products.each do |pp|
-      if pp.sale.store_sale == 'PurchaseStoreRS'
-        rs -= pp.quantity
-      elsif pp.sale.store_sale == 'PurchaseStoreSP'
-        sp -= pp.quantity
-      else
-        h -= pp.quantity
-      end
-    end
+    rs = self.purchase_products.from_store("PurchaseStoreRS").sum("Quantity")
+    sp = self.purchase_products.from_store("PurchaseStoreSP").sum("Quantity")
+    rs -= self.sale_products.from_sale_store("PurchaseStoreRS").sum("Quantity")
+    sp -= self.sale_products.from_sale_store("PurchaseStoreSP").sum("Quantity")
     "RS: #{rs}  SP: #{sp}"
   end
 
@@ -89,4 +52,23 @@ class Product < ApplicationRecord
     RQRCode::QRCode.new(obj.to_json)
   end
 
+  DATATABLE_COLUMNS = %w[custom_id name].freeze
+
+  class << self
+    def datatable_filter(search_value, search_columns)
+      return all if search_value.blank?
+
+      result = none
+      search_columns.each do |key, value|
+        filter = where("#{DATATABLE_COLUMNS[key.to_i]} ILIKE ?", "%#{search_value}%")
+        result = result.or(filter) if value['searchable']
+      end
+      result
+    end
+
+    def datatable_order(order_column_index, order_dir)
+      order_column_index = 1 if order_column_index == 4
+      order("#{Product::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
+    end
+  end
 end
