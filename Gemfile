@@ -78,3 +78,5 @@ gem 'fast_jsonapi', '~> 1.7.2', git: 'https://github.com/fast-jsonapi/fast_jsona
 gem 'httparty'
 
 gem 'nokogiri'
+
+gem 'pagy', '~> 3.5'
