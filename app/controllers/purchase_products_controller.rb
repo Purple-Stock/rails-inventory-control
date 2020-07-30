@@ -1,12 +1,13 @@
 class PurchaseProductsController < ApplicationController
   before_action :set_purchase_product, only: [:show, :edit, :update, :destroy]
-
+  include Pagy::Backend
   # GET /purchase_products
   # GET /purchase_products.json
   def index; end
 
   def index_defer
-    @purchase_products = PurchaseProduct.all
+    #@purchase_products = PurchaseProduct.includes(product: [:image_attachment]).all
+    @purchase_products = PurchaseProduct.includes(:product).all
     render json: PurchaseProductSerializer.new(@purchase_products).serialized_json
   end
 
