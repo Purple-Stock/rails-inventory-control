@@ -2,7 +2,7 @@
 
 class ProductsController < ApplicationController
   skip_before_action :verify_authenticity_token
-  skip_before_action :authenticate_user!, only: [:index_defer]
+  skip_before_action :authenticate_user!, only: [:index_defer, :tags_index_defer]
   before_action :set_product, only: %i[show edit update destroy]
   include Pagy::Backend
   # GET /products
@@ -32,6 +32,11 @@ class ProductsController < ApplicationController
         recordsFiltered: Product.datatable_filter(params['search']['value'], datatable_searchable_columns ).where(active: true).count
     }
     render json:   ProductSerializer.new(@products, options).serialized_json
+  end
+
+  def tags_index_defer
+    @products = Product.includes(:purchase_products, :sale_products, :category).where(active: true)
+    render json: ProductSerializer.new(@products).serialized_json
   end
 
   # GET /products/1
