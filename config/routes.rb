@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   resources :sale_products
   resources :products
   get 'products_defer', to: 'products#index_defer'
+  get 'products_tags_defer', to: 'products#tags_index_defer'
   get '/products/:id/duplicate', to: 'products#duplicate', as: 'meeting_duplicate'
   resources :customers
   resources :categories
