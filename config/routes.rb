@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   namespace :api, defaults: { format: :json } do
     namespace :v1 do
       get 'products/:custom_id', to: 'products#show', as: 'show'
+      get 'products', to: 'products#index', as: 'index'
       post 'purchase_products/add_products', to: 'purchase_products#add_products', as: 'add_products'
     end
   end
