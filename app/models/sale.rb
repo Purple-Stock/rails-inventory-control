@@ -48,4 +48,22 @@ class Sale < ApplicationRecord
       puts "Pedido #{id} já cadastrado"
     end
   end
+
+  def self.save_name_age
+    (1..4).each do |i|
+      @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-08-01&status=cancelado&page=#{i}",
+                                 headers: { content: 'application/json',
+                                            Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      @order_page['result'].each do |order_page|
+        begin
+          SimploClient.create(name: order_page['Wspedido']['cliente_razaosocial'], 
+                              age: Time.now.year - Time.parse(order_page['Wspedido']['cliente_data_nascimento']).year,
+                              order_date: Time.parse(order_page['Wspedido']['data_pedido']))
+        rescue ArgumentError
+          puts 'erro'
+        end
+      end
+    end
+  end
 end
+

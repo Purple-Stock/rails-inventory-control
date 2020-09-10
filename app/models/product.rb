@@ -6,6 +6,7 @@ class Product < ApplicationRecord
   has_many :sale_products
   has_many :group_products
   has_one_attached :image
+  has_many :simplo_items
 
   def count_purchase_product
     rs = self.purchase_products.from_store("PurchaseStoreRS").sum("Quantity")
@@ -37,6 +38,10 @@ class Product < ApplicationRecord
     rs ||= self.sale_products.from_sale_store("PurchaseStoreRS").sum("Quantity")
     sp ||= self.sale_products.from_sale_store("PurchaseStoreSP").sum("Quantity")
     "RS: #{rs}  SP: #{sp}"
+  end
+
+  def sum_simplo_items
+    self.simplo_items.sum("quantity")
   end
 
   def balance
