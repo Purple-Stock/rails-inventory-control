@@ -7,20 +7,22 @@ class PurchaseProduct < ApplicationRecord
   DATATABLE_COLUMNS = %w[custom_id name].freeze
 
   class << self
-    def datatable_filter(search_value, search_columns)
+    def filter_products(purchased_products, search_value)
       return all if search_value.blank?
 
       result = none
-      search_columns.each do |key, value|
-        filter = where("#{DATATABLE_COLUMNS[key.to_i]} ILIKE ?", "%#{search_value}%")
-        result = result.or(filter) if value['searchable']
+      DATATABLE_COLUMNS.each do |column|
+        filter = purchased_products.where("products.#{column} ILIKE ? ", "%#{search_value}%")
+        result = result.or(filter)
       end
       result
     end
 
     def datatable_order(order_column_index, order_dir)
       order_column_index = 1 if order_column_index == 4
-      order("#{Product::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
+      order("products.#{PurchaseProduct::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
     end
   end
+
+
 end
