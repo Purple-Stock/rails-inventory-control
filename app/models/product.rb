@@ -41,7 +41,7 @@ class Product < ApplicationRecord
   end
 
   def sum_simplo_items
-    self.simplo_items.sum("quantity")
+    self.simplo_items.map(&:quantity).sum
   end
 
   def balance
