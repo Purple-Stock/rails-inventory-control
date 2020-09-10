@@ -9,16 +9,6 @@ class ProductsController < ApplicationController
   # GET /products.json
   def index; end
 
-  def index_tables
-    lines = Product.datatable_filter(params['search']['value'], params['columns']).includes(:purchase_products, :sale_products, :category).where(active: true).limit
-    lines_filtered = lines.count
-
-    render json: { lines: ProductSerializer.new(lines).serialized_json,
-                   draw: params['draw'].to_i,
-                   recordsTotal: Product.count,
-                   recordsFiltered: lines_filtered }
-  end
-
   def index_defer
     @pagy, @products = pagy(Product.datatable_filter(params['search']['value'], datatable_searchable_columns ).includes(:purchase_products, :sale_products, :category).where(active: true),
                             page: (params[:start].to_i / params[:length].to_i + 1),
@@ -31,7 +21,7 @@ class ProductsController < ApplicationController
         recordsTotal: Product.datatable_filter(params['search']['value'], datatable_searchable_columns ).where(active: true).count,
         recordsFiltered: Product.datatable_filter(params['search']['value'], datatable_searchable_columns ).where(active: true).count
     }
-    render json:   ProductSerializer.new(@products, options).serialized_json
+    render json:  ProductSerializer.new(@products, options).serialized_json
   end
 
   def tags_index_defer
