@@ -1,13 +1,25 @@
 class PurchaseProductsController < ApplicationController
   before_action :set_purchase_product, only: [:show, :edit, :update, :destroy]
-
+  include Pagy::Backend
   # GET /purchase_products
   # GET /purchase_products.json
   def index; end
 
   def index_defer
-    @purchase_products = PurchaseProduct.all
-    render json: PurchaseProductSerializer.new(@purchase_products).serialized_json
+    @purchase_products = PurchaseProduct.includes(:product).references(:products)
+    @purchased_products_filtered = @purchase_products.filter_products(@purchase_products, params['search']['value'])
+    @pagy, @purchase_products = pagy(@purchased_products_filtered,
+                            page: (params[:start].to_i / params[:length].to_i + 1),
+                            items: params[:length].to_i)
+    @purchase_products = @purchase_products.datatable_order(params['order']['0']['column'].to_i,
+                                         params['order']['0']['dir'])
+    options = {}
+    options[:meta] = {
+        draw: params['draw'].to_i,
+        recordsTotal: @purchased_products_filtered.size,
+        recordsFiltered: @purchased_products_filtered.size
+    }
+    render json:  PurchaseProductSerializer.new(@purchase_products, options).serialized_json
   end
 
   # GET /purchase_products/1
@@ -78,5 +90,9 @@ class PurchaseProductsController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def purchase_product_params
       params.require(:purchase_product).permit(:quantity, :value, :product_id, :purchaseId, :created_at, :store_entrance)
+    end
+
+    def datatable_searchable_columns
+      {"0" => { "searchable" => true }, "1" => { "searchable" => true } }
     end
 end

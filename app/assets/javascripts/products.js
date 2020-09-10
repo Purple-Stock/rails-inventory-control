@@ -5,7 +5,6 @@ $(document).ready( function () {
     url: '/products_defer',
     deferRender: true,
     dataSrc: function (json) {
-        console.log(json.meta)
         json.recordsTotal = json.meta.recordsTotal;
         json.recordsFiltered = json.meta.recordsFiltered;
         return json.data
