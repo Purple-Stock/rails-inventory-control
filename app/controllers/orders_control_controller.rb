@@ -7,7 +7,7 @@ class OrdersControlController < ApplicationController
     # unique_order
     @orders.each do |order|
       # if order['Wspedido']['pedidostatus_id'] == '23' || order['Wspedido']['pedidostatus_id'] == '3'
-        @send_orders << order
+      @send_orders << order
       # end
     end
     @send_orders
@@ -15,7 +15,7 @@ class OrdersControlController < ApplicationController
 
   def show_orders_products_stock
     @products = Product.includes(:purchase_products, simplo_items: [:simplo_order])
-                       .where(simplo_orders: { order_status: ['2', '30', '31']} )
+                       .where(simplo_orders: { order_status: %w[2 30 31] })
                        .order(custom_id: :desc)
   end
 
