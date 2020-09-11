@@ -20,9 +20,9 @@ class SimploOrder < ApplicationRecord
             order_page['Item'].each do |item|
               product = Product.where(sku: item['sku']).or(Product.where(extra_sku: item['sku'])).first
               if product.present?
-                SimploItem.create(sku: item['sku'], quantity: item['quantidade'].to_i, simplo_order_id: sc.id, product_id: product.id)
+                SimploItem.create(sku: item['sku'], quantity: item['quantidade'].to_i, simplo_order_id: simplo_order.id, product_id: product.id)
               else
-                SimploItem.create(sku: item['sku'], quantity: item['quantidade'].to_i, simplo_order_id: sc.id)
+                SimploItem.create(sku: item['sku'], quantity: item['quantidade'].to_i, simplo_order_id: simplo_order.id)
               end
             end
           else
