@@ -37,10 +37,10 @@ class SimploOrder < ApplicationRecord
 
   def self.update_order_status(order_number, order_status)
     id = (order_number.to_i + 1).to_s
-    data = { Wspedido: { status: { id: order_status } } }
+    data = { 'Wspedido': { 'Status': { 'id': order_status } } }
     begin
       HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
-                   body: data.to_json,
+                   body: data,
                    headers: { content: 'application/json',
                               Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
     rescue ArgumentError
