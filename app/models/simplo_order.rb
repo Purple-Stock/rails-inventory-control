@@ -47,4 +47,37 @@ class SimploOrder < ApplicationRecord
       puts 'erro'
     end
   end
+
+  def self.update_postal_code(order_number, post_code)
+    id = (order_number.to_i + 1).to_s
+    data = { 'Wspedido': { 'Entrega': { 'rastreamento': post_code } } }
+    begin
+      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
+                   body: data,
+                   headers: { content: 'application/json',
+                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+    rescue ArgumentError
+      puts 'erro'
+    end
+  end
+
+  def self.update_order_status_postal_code(order_number, order_status, post_code)
+    id = (order_number.to_i + 1).to_s
+    os_data = { 'Wspedido': { 'Status': { 'id': order_status } } }
+    pc_data = { 'Wspedido': { 'Entrega': { 'rastreamento': post_code } } }
+    begin
+      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
+                   body: os_data,
+                   headers: { content: 'application/json',
+                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+
+      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
+        body: pc_data,
+        headers: { content: 'application/json',
+                    Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+    rescue ArgumentError
+      puts 'erro'
+    end
+  end
 end
+
