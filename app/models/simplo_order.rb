@@ -35,11 +35,11 @@ class SimploOrder < ApplicationRecord
     end
   end
 
-  def self.update_order_status(order_number)
+  def self.update_order_status(order_number, order_status)
     id = (order_number.to_i + 1).to_s
-    data = { Wspedido: { status: { id: id } } }
+    data = { Wspedido: { status: { id: order_status } } }
     begin
-      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{i}.json",
+      HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
                    body: data.to_json,
                    headers: { content: 'application/json',
                               Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
