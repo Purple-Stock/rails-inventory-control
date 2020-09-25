@@ -22,7 +22,20 @@ class PurchaseProduct < ApplicationRecord
       order_column_index = 1 if order_column_index == 4
       order("products.#{PurchaseProduct::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
     end
+
+    def inventory_quantity(custom_id, quantity, store)
+      product = Product.find_by(custom_id: custom_id)
+      purchase_product = product.purchase_products.from_store(store).sum("Quantity")
+      sale_products = product.sale_products.from_sale_store(store).sum("Quantity")
+      balance = purchase_product - sale_products
+      purchase_quantity = quantity - balance
+      purchase_store = 1
+      purchase_store = 2 if store == "PurchaseStoreSP"
+      begin
+        PurchaseProduct.create(product_id: product.id, quantity: purchase_quantity, store_entrance: purchase_store)
+      rescue ArgumentError
+        puts 'erro'
+      end
+    end
   end
-
-
 end
