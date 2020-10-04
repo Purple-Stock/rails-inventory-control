@@ -5,8 +5,9 @@ class Api::V1::PurchaseProductsController < ActionController::Base
 	def add_products
 		save_succeeded = true
 		@target_records = []
+		# byebug
 		@products.each do |product|
-			purchase_product = PurchaseProduct.new(product_id: product[:product_id], quantity: product[:quantity])
+			purchase_product = PurchaseProduct.new(product_id: product[:product_id], quantity: product[:quantity], store_entrance: params[:store_entrance])
 			save_succeeded = false unless purchase_product.save
 			@target_records << purchase_product
 		end
