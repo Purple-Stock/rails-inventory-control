@@ -7,6 +7,7 @@
       <th>Código Produto</th>
       <th>Nome</th>
       <th>Quantidade estoque</th>
+      <th>Quantidade saída</th>
       <th>Quantidade pedidos</th>
     </tr>
   </thead>
@@ -16,6 +17,7 @@
         <td><%= product.custom_id %></td>
         <td><%= product.name %></td>
         <td><%= product.balance %></td>
+        <td><%= product.count_sale_product %></td>
         <td><%= product.sum_simplo_items %></td>
       </tr>
     <% end %>
