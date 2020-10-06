@@ -31,6 +31,7 @@ Rails.application.routes.draw do
       get 'products/:custom_id', to: 'products#show', as: 'show'
       get 'products', to: 'products#index', as: 'index'
       post 'purchase_products/add_products', to: 'purchase_products#add_products', as: 'add_products'
+      post 'purchase_products/add_inventory_quantity', to: 'purchase_products#add_inventory_quantity', as: 'add_inventory_quantity'
     end
   end
   root to: 'sales#index'
