@@ -1,6 +1,6 @@
 class Api::V1::PurchaseProductsController < ActionController::Base
 	skip_before_action :verify_authenticity_token
-	before_action :set_products, only: %i[add_products, add_inventory_quantity]
+	before_action :set_products, only: %i[add_products add_inventory_quantity]
 	
 	def add_products
 		save_succeeded = true
@@ -28,7 +28,6 @@ class Api::V1::PurchaseProductsController < ActionController::Base
       sale_products = product_found.sale_products.from_sale_store(purchase_store).sum("Quantity")
       balance = purchase_product - sale_products
 			purchase_quantity = product[:quantity] - balance
-			# byebug
       begin
 				purchase_product = PurchaseProduct.new(product_id: product[:product_id], quantity: purchase_quantity, store_entrance: params[:store_entrance])
 				save_succeeded = false unless purchase_product.save
