@@ -34,5 +34,5 @@ Rails.application.routes.draw do
       post 'purchase_products/add_inventory_quantity', to: 'purchase_products#add_inventory_quantity', as: 'add_inventory_quantity'
     end
   end
-  root to: 'sales#index'
+  root to: 'products#index'
 end
