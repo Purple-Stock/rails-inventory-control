@@ -29,6 +29,7 @@ pt-BR:
   discount: Desconto em R$
   order_code: Código Pedido
   percentage: Porcentagem
+  total_exchange_value: Valor troca
   activerecord:
     errors:
       messages:

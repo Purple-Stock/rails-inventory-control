@@ -93,6 +93,13 @@
     </div>
     <%=f.error_span(:exchange) %>
   </div>
+  <div class="form-group">
+    <%= f.label t(:total_exchange_value), :class => 'control-label col-lg-2' %>
+    <div class="col-lg-4">
+      <%= f.text_field :total_exchange_value %>
+    </div>
+    <%=f.error_span(:total_exchange_value) %>
+  </div>
   
   <div class="form-group">
     <div class="col-lg-offset-2 col-lg-4">

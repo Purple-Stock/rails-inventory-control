@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_07_023648) do
+ActiveRecord::Schema.define(version: 2020_10_31_135952) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -149,6 +149,82 @@ ActiveRecord::Schema.define(version: 2020_09_07_023648) do
     t.boolean "exchange", default: false
     t.string "order_code"
     t.integer "store_sale", default: 0
+    t.float "total_exchange_value"
     t.index ["customer_id"], name: "index_sales_on_customer_id"
   end
 
+  create_table "simplo_clients", force: :cascade do |t|
+    t.string "name"
+    t.integer "age"
+    t.datetime "order_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "simplo_items", force: :cascade do |t|
+    t.string "sku"
+    t.integer "quantity"
+    t.bigint "simplo_order_id"
+    t.bigint "product_id"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["product_id"], name: "index_simplo_items_on_product_id"
+    t.index ["simplo_order_id"], name: "index_simplo_items_on_simplo_order_id"
+  end
+
+  create_table "simplo_orders", force: :cascade do |t|
+    t.string "client_name"
+    t.string "order_id"
+    t.string "order_status"
+    t.string "order_date"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "simplo_products", force: :cascade do |t|
+    t.string "name"
+    t.string "sku"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "suppliers", force: :cascade do |t|
+    t.string "name"
+    t.string "cnpj"
+    t.string "email"
+    t.string "cellphone"
+    t.string "phone"
+    t.string "address"
+    t.string "city"
+    t.string "state"
+    t.string "landmark"
+    t.string "note"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["email"], name: "index_users_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+  end
+
+  add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
+  add_foreign_key "group_products", "groups"
+  add_foreign_key "group_products", "products"
+  add_foreign_key "products", "categories"
+  add_foreign_key "purchase_products", "products"
+  add_foreign_key "purchase_products", "purchases"
+  add_foreign_key "purchases", "suppliers"
+  add_foreign_key "sale_products", "products"
+  add_foreign_key "sale_products", "sales"
+  add_foreign_key "sales", "customers"
+  add_foreign_key "simplo_items", "products"
+  add_foreign_key "simplo_items", "simplo_orders"
+end
