@@ -21,7 +21,15 @@ class SaleSerializer
     else
       'Não'
     end
-  end   
+  end
+
+  attribute :exchange do |object|
+    if object.exchange
+      'Sim'
+    else
+      'Não'
+    end
+  end  
 
   attribute :disclosure do |object|
     if object.disclosure

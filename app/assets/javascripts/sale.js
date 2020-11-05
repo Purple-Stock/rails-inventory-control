@@ -70,12 +70,11 @@ $(document).ready( function () {
         columns: [
             { title: "Cliente", data: 'attributes.name' },
             { title: "Desconto em R$", data: 'attributes.discount' },
-            { title: "Porcentagem", data: 'attributes.percentage' },
             { title: "Online", data: 'attributes.online' },
             { title: "Código Pedido Online", data: 'attributes.order_code' },
             { title: "Valor", data: 'attributes.value' },
             { title: "Divulgação", data: 'attributes.disclosure' },
-            { title: "Valor", data: 'attributes.value' },
+            { title: "Troca", data: 'attributes.exchange' },
             { title: "Data de criação", data: 'attributes.created_at' },
             { title: "Ações", data: 'attributes.id', render: function(id){
                 return '<a class="btn btn-default btn-xs" href="/sales/'+ id + '">Ver</a><a class="btn btn-default btn-xs" href="/sales/'+ id + '/edit">Editar</a><a data-confirm="Você tem certeza?" data-method="delete" rel="nofollow" class="btn btn-danger btn-xs" href="/sales/'+ id + '">Deletar</a>';               
