@@ -5,7 +5,7 @@
   <%= csrf_meta_tags %>
   <%= csp_meta_tag %>
 
-  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+  <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
   <link rel="icon" href="https://purple-stock.s3-sa-east-1.amazonaws.com/favicon_purple.ico" />
   <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.css">
   <link href="https://cdn.jsdelivr.net/npm/select2@4.0.12/dist/css/select2.min.css" rel="stylesheet" />
@@ -37,6 +37,7 @@
             <%= menu_item "Controle de Pedidos Produtos", show_orders_products_stock_path %>
             <%= menu_item "Gerador de etiquetas", 'https://pimaco-tags.herokuapp.com/' %>
             <%= menu_item "Relatório Diário de vendas", reports_daily_sale_path %>
+            <%= menu_item "Transferência de estoque", stock_transfer_path %>
 
             <%#= menu_item "Fornecedores", suppliers_path %>
         <% end %>
