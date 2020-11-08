@@ -81,6 +81,21 @@ class PurchaseProductsController < ApplicationController
     end
   end
 
+  def stock_transfer; end
+
+  def save_stock_transfer
+    begin
+      PurchaseProduct.create(product_id: params['product_id'], quantity: -params['quantity'].to_i, store_entrance: params['stock_transfer']['origin'])
+      PurchaseProduct.create(product_id: params['product_id'], quantity: params['quantity'].to_i, store_entrance: params['stock_transfer']['destiny'])
+    rescue ArgumentError
+      puts 'erro'
+    end
+    respond_to do |format|
+      format.html { redirect_to stock_transfer_path, notice: 'Transferência Concluída.' }
+      format.json { head :no_content }
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_product
