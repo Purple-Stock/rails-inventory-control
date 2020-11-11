@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   get '/info', to: 'companies#show'
   resources :purchase_products
   get 'purchase_products_defer', to: 'purchase_products#index_defer'
+  get 'inventory_view', to: 'purchase_products#inventory_view', as: 'inventory_view'
+  post 'save_inventory', to: 'purchase_products#save_inventory', as: 'save_inventory'
   get 'reports/daily_sale', to: 'reports#daily_sale'
   resources :purchases
   resources :suppliers

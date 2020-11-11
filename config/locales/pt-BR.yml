@@ -183,6 +183,7 @@ pt-BR:
       update: Atualizar %{model}
     links:
       new: Novo
+      inventory: Novo Inventáro
       edit: Editar
       destroy: Deletar
       cancel: Cancelar
