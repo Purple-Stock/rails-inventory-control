@@ -96,6 +96,20 @@ class PurchaseProductsController < ApplicationController
     end
   end
 
+  def inventory_view; end
+
+  def save_inventory
+    begin
+      product = Product.find(params['product_id'])
+      PurchaseProduct.inventory_quantity(product.custom_id, params['quantity'].to_i, params['inventory']['destiny'])
+      respond_to do |format|
+        format.html { redirect_to stock_transfer_path, notice: 'Inventário Concluído.' }
+      end
+    rescue ArgumentError
+      puts 'erro'
+    end
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_purchase_product
