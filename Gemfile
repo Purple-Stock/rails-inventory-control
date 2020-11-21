@@ -80,3 +80,6 @@ gem 'httparty'
 gem 'nokogiri'
 
 gem 'pagy', '~> 3.5'
+
+gem "business", "~> 2.0"
+

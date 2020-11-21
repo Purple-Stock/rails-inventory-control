@@ -19,6 +19,11 @@ class OrdersControlController < ApplicationController
                        .order(custom_id: :desc)
   end
 
+  def show_orders_business_day
+    @simplo_orders = SimploOrder.where(order_status: %w[2 30 31]).order(order_id: :asc)
+    @calendar = SimploOrder.calendar
+  end
+
   def post_mail_control
     @post_data = PostDatum.all
   end
