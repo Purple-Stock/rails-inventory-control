@@ -99,6 +99,7 @@ GEM
     bootsnap (1.4.6)
       msgpack (~> 1.0)
     builder (3.2.4)
+    business (2.1.0)
     byebug (11.1.1)
     capybara (3.32.1)
       addressable
@@ -310,6 +311,7 @@ DEPENDENCIES
   acts_as_tenant
   aws-sdk-s3
   bootsnap (>= 1.1.0)
+  business (~> 2.0)
   byebug
   capybara (>= 2.15)
   chromedriver-helper

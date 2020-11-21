@@ -79,5 +79,12 @@ class SimploOrder < ApplicationRecord
       puts 'erro'
     end
   end
+
+  def self.calendar
+    Business::Calendar.new(
+                            working_days: %w[mon tue wed thu fri],
+                            holidays: ['20/11/2020','25/12/2020']
+                          )
+  end
 end
 

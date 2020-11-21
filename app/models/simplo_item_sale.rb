@@ -20,7 +20,8 @@ class SimploItemSale < ApplicationRecord
                                     valor_unitario: item['valor_unitario'], 
                                     valor_total: item['valor_total'], peso: item['peso'], 
                                     desconto: item['desconto'], 
-                                    data_pedido: DateTime.parse(order_page['Wspedido']['data_pedido']))
+                                    data_pedido: DateTime.parse(order_page['Wspedido']['data_pedido']),
+                                    order_id: (item['pedido_id']).to_i - 1).to_s
             rescue ArgumentError
               puts 'erro'
             end
