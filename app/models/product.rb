@@ -53,7 +53,7 @@ class Product < ApplicationRecord
   end
 
   def self.generate_qrcode(url)
-    obj = { id: url.id, custom_id: url.custom_id, name: url.name, price: url.price }
+    obj = { id: url.id, custom_id: url.custom_id, name: url.name }
     RQRCode::QRCode.new(obj.to_json)
   end
 
@@ -74,6 +74,23 @@ class Product < ApplicationRecord
     def datatable_order(order_column_index, order_dir)
       order_column_index = 1 if order_column_index == 4
       order("#{Product::DATATABLE_COLUMNS[order_column_index]} #{order_dir}")
+    end
+
+    def integrate_product(id)
+      @order_page = HTTParty.get("https://purchasestore.com.br/ws/wsprodutos/#{id}.json",
+                    headers: { content: 'application/json',
+                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+      @order_page['result']['WsprodutoEstoque'].each do |order_page|
+        begin
+          Product.create(name: @order_page['result']['Wsproduto']['nome'],
+                         sku: order_page['sku'],
+                         price: order_page['valor_venda'],
+                         category_id: 1,
+                         active: true)
+        rescue ArgumentError
+          puts 'erro'
+        end
+      end
     end
   end
 end
