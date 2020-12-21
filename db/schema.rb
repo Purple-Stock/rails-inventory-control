@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_11_12_163448) do
+ActiveRecord::Schema.define(version: 2020_12_04_001321) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -185,6 +185,20 @@ ActiveRecord::Schema.define(version: 2020_11_12_163448) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["product_id"], name: "index_simplo_items_on_product_id"
     t.index ["simplo_order_id"], name: "index_simplo_items_on_simplo_order_id"
+  end
+
+  create_table "simplo_order_payments", force: :cascade do |t|
+    t.string "order_id"
+    t.string "client_name"
+    t.string "integrador"
+    t.string "pagamento_forma"
+    t.string "codigo_transacao"
+    t.string "parcelas"
+    t.string "total"
+    t.string "data_pedido"
+    t.string "order_status"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
   end
 
   create_table "simplo_orders", force: :cascade do |t|
