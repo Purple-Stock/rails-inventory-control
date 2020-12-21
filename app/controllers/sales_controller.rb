@@ -15,8 +15,8 @@ class SalesController < ApplicationController
     options = {}
     options[:meta] = {
       draw: params['draw'].to_i,
-      recordsTotal: Sale.datatable_filter(params['search']['value'], datatable_searchable_columns ).includes(:sale_products, :customer).references(:customers).count,
-      recordsFiltered: Sale.datatable_filter(params['search']['value'], datatable_searchable_columns ).includes(:sale_products, :customer).references(:customers).count
+      recordsTotal: @sales.size,
+      recordsFiltered: @sales.size
     }
     render json: SaleSerializer.new(@sales, options).serialized_json
   end
