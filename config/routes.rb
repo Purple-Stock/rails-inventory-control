@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   get 'inventory_view', to: 'purchase_products#inventory_view', as: 'inventory_view'
   post 'save_inventory', to: 'purchase_products#save_inventory', as: 'save_inventory'
   get 'reports/daily_sale', to: 'reports#daily_sale'
+  get 'reports/all_reports', to: 'reports#all_reports', as: 'all_reports'
   resources :purchases
   resources :suppliers
   resources :sales

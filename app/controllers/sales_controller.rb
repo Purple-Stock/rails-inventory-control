@@ -1,17 +1,19 @@
+# frozen_string_literal: true
+
 class SalesController < ApplicationController
-  before_action :set_sale, only: [:show, :edit, :update, :destroy]
+  before_action :set_sale, only: %i[show edit update destroy]
   include Pagy::Backend
   # GET /sales
   # GET /sales.json
   def index; end
 
   def index_defer
-    @sales = Sale.includes(:sale_products, :customer).references(:customers)
+    @sales = Sale.includes(:sale_products, :customer).references(:customers).order(created_at: :desc)
     @pagy, @sales = pagy(@sales.datatable_filter(params['search']['value'], datatable_searchable_columns),
                          page: (params[:start].to_i / params[:length].to_i + 1),
                          items: params[:length].to_i)
     @sales = @sales.datatable_order(params['order']['0']['column'].to_i,
-                                       params['order']['0']['dir'])
+                                    params['order']['0']['dir'])
     options = {}
     options[:meta] = {
       draw: params['draw'].to_i,
@@ -78,7 +80,7 @@ class SalesController < ApplicationController
   def insert_orders; end
 
   def save_orders
-    number_orders = params[:number_orders].delete(' ').split(",")
+    number_orders = params[:number_orders].delete(' ').split(',')
     number_orders.each do |no|
       Sale.integrate_orders(no, params[:sale][:origin])
     end
@@ -88,27 +90,29 @@ class SalesController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_sale
-      @sale = Sale.find(params[:id])
-    end
 
-    def calc_value
-      value = 0
-      @sale.sale_products.each do |sale_product|
-        value += sale_product.value
-      end
-      value -= @sale.discount if @sale.discount.present?
-      @sale.update(value: value.round(2))
-    end
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def sale_params
-      params.require(:sale).permit(:value, :exchange, :discount, :percentage, :online, :created_at, :disclosure, :customer_id,
-                                   :payment_type, :store_sale, :total_exchange_value,
-                                   sale_products_attributes: [:id, :product_id, :quantity, :value, :_destroy])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_sale
+    @sale = Sale.find(params[:id])
+  end
 
-    def datatable_searchable_columns
-      {"0" => { "searchable" => true }, "1" => { "searchable" => true }}
+  def calc_value
+    value = 0
+    @sale.sale_products.each do |sale_product|
+      value += sale_product.value
     end
+    value -= @sale.discount if @sale.discount.present?
+    @sale.update(value: value.round(2))
+  end
+
+  # Never trust parameters from the scary internet, only allow the white list through.
+  def sale_params
+    params.require(:sale).permit(:value, :exchange, :discount, :percentage, :online, :created_at, :disclosure, :customer_id,
+                                 :payment_type, :store_sale, :total_exchange_value,
+                                 sale_products_attributes: %i[id product_id quantity value _destroy])
+  end
+
+  def datatable_searchable_columns
+    { '0' => { 'searchable' => true }, '1' => { 'searchable' => true } }
+  end
 end
