@@ -92,3 +92,17 @@ $(document).ready( function () {
     });
 
 });
+function fetchSaleProducts(element) {
+    const row = element.parentElement.parentElement.parentElement;
+    const quantity = row.querySelector('.quantity').value;
+    id = row.querySelector('.product-id').value;
+    fetch('/api/v1/sale_products/' + id).then(function (res) {
+        if (res.ok) {
+            return res.json();
+        }
+    }).then(function (data) {
+        row.querySelector('.product-value').value = (data.price * parseInt(quantity)).toFixed(2);
+    }).catch(function (err) {
+        return console.log(err);
+    });
+}
