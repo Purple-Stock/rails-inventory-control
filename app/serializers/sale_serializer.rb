@@ -44,7 +44,7 @@ class SaleSerializer
   end
 
    attribute :created_at do |object|
-    object.created_at.strftime("%-d/%-m/%Y %H:%M")
+    object.created_at.strftime("%d/%m/%Y %H:%M")
   end
 
 end
