@@ -96,10 +96,10 @@ class SalesController < ApplicationController
     def calc_value
       value = 0
       @sale.sale_products.each do |sale_product|
-        value += sale_product.value * sale_product.quantity
+        value += sale_product.value
       end
       value -= @sale.discount if @sale.discount.present?
-      @sale.update(value: value)
+      @sale.update(value: value.round(2))
     end
     # Never trust parameters from the scary internet, only allow the white list through.
     def sale_params
