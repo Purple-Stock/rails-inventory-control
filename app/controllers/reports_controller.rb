@@ -13,4 +13,6 @@ class ReportsController < ApplicationController
                                         GROUP BY s.created_at::DATE
                                         ORDER BY s.created_at::DATE DESC;")
   end
+
+  def all_reports; end
 end
