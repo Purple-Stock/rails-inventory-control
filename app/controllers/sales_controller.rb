@@ -1,13 +1,24 @@
 class SalesController < ApplicationController
   before_action :set_sale, only: [:show, :edit, :update, :destroy]
-
+  include Pagy::Backend
   # GET /sales
   # GET /sales.json
   def index; end
 
   def index_defer
-    @sales = Sale.includes(:sale_products)
-    render json: SaleSerializer.new(@sales).serialized_json
+    @sales = Sale.includes(:sale_products, :customer).references(:customers)
+    @pagy, @sales = pagy(@sales.datatable_filter(params['search']['value'], datatable_searchable_columns),
+                         page: (params[:start].to_i / params[:length].to_i + 1),
+                         items: params[:length].to_i)
+    @sales = @sales.datatable_order(params['order']['0']['column'].to_i,
+                                       params['order']['0']['dir'])
+    options = {}
+    options[:meta] = {
+      draw: params['draw'].to_i,
+      recordsTotal: @sales.size,
+      recordsFiltered: @sales.size
+    }
+    render json: SaleSerializer.new(@sales, options).serialized_json
   end
 
   # GET /sales/1
@@ -95,5 +106,9 @@ class SalesController < ApplicationController
       params.require(:sale).permit(:value, :exchange, :discount, :percentage, :online, :created_at, :disclosure, :customer_id,
                                    :payment_type, :store_sale, :total_exchange_value,
                                    sale_products_attributes: [:id, :product_id, :quantity, :value, :_destroy])
+    end
+
+    def datatable_searchable_columns
+      {"0" => { "searchable" => true }, "1" => { "searchable" => true }}
     end
 end

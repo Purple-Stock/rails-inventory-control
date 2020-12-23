@@ -65,5 +65,23 @@ class Sale < ApplicationRecord
       end
     end
   end
+  DATATABLE_COLUMNS = %w[customers.name order_code].freeze
+  DATATABLE_COLUMNS_ORDERING = %w[customers.name discount online order_code value disclosure exchange sales.created_at].freeze
+  class << self
+    def datatable_filter(search_value, search_columns)
+      return all if search_value.blank?
+
+      result = none
+      search_columns.each do |key, value|
+        filter = where("#{DATATABLE_COLUMNS[key.to_i]} ILIKE ?", "%#{search_value}%")
+        result = result.or(filter) if value['searchable']
+      end
+      result
+    end
+
+    def datatable_order(order_column_index, order_dir)
+      order("#{Sale::DATATABLE_COLUMNS_ORDERING[order_column_index]} #{order_dir}")
+    end
+  end
 end
 
