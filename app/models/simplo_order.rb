@@ -4,11 +4,11 @@ class SimploOrder < ApplicationRecord
   def self.integrate_order_items
     @order_page = HTTParty.get('https://purchasestore.com.br/ws/wspedidos.json',
                                headers: { content: 'application/json',
-                                          Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                                          Appkey: 'your-key' })
     (1..@order_page['pagination']['page_count']).each do |i|
       @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?page=#{i}",
                                  headers: { content: 'application/json',
-                                            Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                                            Appkey: 'your-key' })
       @order_page['result'].each do |order_page|
         order = SimploOrder.find_by(order_id: order_page['Wspedido']['numero'])
         if order.nil?
@@ -42,7 +42,7 @@ class SimploOrder < ApplicationRecord
       HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
                    body: data,
                    headers: { content: 'application/json',
-                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                              Appkey: 'your-key' })
     rescue ArgumentError
       puts 'erro'
     end
@@ -55,7 +55,7 @@ class SimploOrder < ApplicationRecord
       HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
                    body: data,
                    headers: { content: 'application/json',
-                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                              Appkey: 'your-key' })
     rescue ArgumentError
       puts 'erro'
     end
@@ -69,12 +69,12 @@ class SimploOrder < ApplicationRecord
       HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
                    body: os_data,
                    headers: { content: 'application/json',
-                              Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                              Appkey: 'your-key' })
 
       HTTParty.put("https://purchasestore.com.br/ws/wspedidos/#{id}.json",
         body: pc_data,
         headers: { content: 'application/json',
-                    Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                    Appkey: 'your-key' })
     rescue ArgumentError
       puts 'erro'
     end

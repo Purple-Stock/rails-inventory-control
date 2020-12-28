@@ -3,7 +3,7 @@ class SimploProduct < ApplicationRecord
   def simplo_products
     @products = HTTParty.get("https://purchasestore.com.br/ws/wsprodutos.json?page=1",
                headers: { content: 'application/json',
-                          Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' 
+                          Appkey: 'your-key' 
                         })
     @products['result'].each do |product|
       name = product['Wsproduto']['nome']

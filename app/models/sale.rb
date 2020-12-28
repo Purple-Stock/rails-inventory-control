@@ -14,7 +14,7 @@ class Sale < ApplicationRecord
     if sale.nil?
       order = HTTParty.get("https://purchasestore.com.br/ws/wspedidos/#{id}.json?",
                            headers: { content: 'application/json',
-                                      Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                                      Appkey: 'your-key' })
 
       customer = Customer.where(cpf: order['result']['Wspedido']['cliente_cpfcnpj'].delete('.-')).first
       customer = Customer.where(cpf: order['result']['Wspedido']['cliente_cpfcnpj']).first if customer.nil?
@@ -53,7 +53,7 @@ class Sale < ApplicationRecord
     (1..4).each do |i|
       @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-08-01&status=cancelado&page=#{i}",
                                  headers: { content: 'application/json',
-                                            Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                                            Appkey: 'your-key' })
       @order_page['result'].each do |order_page|
         begin
           SimploClient.create(name: order_page['Wspedido']['cliente_razaosocial'], 

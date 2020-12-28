@@ -4,11 +4,11 @@ class SimploItemSale < ApplicationRecord
   def self.integrate_item_sale
     @order_page = HTTParty.get('https://purchasestore.com.br/ws/wspedidos.json?data_inicio=2020-10-01',
                                headers: { content: 'application/json',
-                                          Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                                          Appkey: 'your-key' })
     (1..@order_page['pagination']['page_count']).each do |i|
       @order_page = HTTParty.get("https://purchasestore.com.br/ws/wspedidos.json?page=#{i}",
                                  headers: { content: 'application/json',
-                                            Appkey: 'ZTgyYjMzZDJhMDVjMTVjZWM4OWNiMGU5NjI1NTNkYmU' })
+                                            Appkey: 'your-key' })
       @order_page['result'].each do |order_page|
         if order_page["Wspedido"]["pedidostatus_id"] != '24' && order_page["Wspedido"]["pedidostatus_id"] != '1' && order_page["Wspedido"]["pedidostatus_id"] != '4' #vendas diárias
           order_page['Item'].each do |item|
